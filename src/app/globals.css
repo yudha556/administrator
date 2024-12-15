@@ -19,3 +19,15 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.apexcharts-tooltip {
+  color: #000000 ; /* Memaksa teks menjadi hitam */
+}
+
+.apexcharts-tooltip-title {
+  display: none; /* Menghilangkan judul tooltip */
+}
+
+.apexcharts-tooltip-series-group {
+  display: none; /* Menghilangkan ikon bulat */
+}

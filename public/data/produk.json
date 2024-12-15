@@ -1,0 +1,27 @@
+{
+    "2023": {
+      "products": [
+        {
+          "name": "Product A",
+          "sales": 5000
+        },
+        {
+          "name": "Product B",
+          "sales": 4000
+        },
+        {
+          "name": "Product C",
+          "sales": 3000
+        },
+        {
+          "name": "Product D",
+          "sales": 2000
+        },
+        {
+          "name": "Product E",
+          "sales": 1000
+        }
+      ]
+    }
+  }
+  
