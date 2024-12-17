@@ -1,25 +1,32 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid } from 'gridjs-react';
 import 'gridjs/dist/theme/mermaid.css';
+import fetchProduk  from '@/helpers/fetchProduk';
 
 const ProductGrid = () => {
-  const data = [
-    { id: 1, name: 'Produk A', price: 100000 },
-    { id: 2, name: 'Produk B', price: 150000 },
-    { id: 3, name: 'Produk C', price: 200000 },
-    { id: 4, name: 'Produk D', price: 129999 },
-    { id: 5, name: 'Produk E', price: 180000 },
-    { id: 6, name: 'Produk F', price: 220000 },
-    // Tambahkan data produk lainnya
-  ];
-  
+  const [product, setProduk] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const produk = await fetchProduk();  // Ambil data dari helper
+      setProduk(produk);  // Set data produk ke state
+    };
+    getData();
+  }, []);
+
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
       <Grid
-        data={data.map(product => [product.id, product.name, product.price])}
-        columns={['ID', 'Nama Produk', "di Publish", "Stock", "Harga"]}
+        data={product.map(produk => [
+          produk.nama,
+          produk.tanggal,
+          produk.stok,
+          produk.harga,
+          produk.kategori,
+        ])}
+        columns={['nama', 'tanggal', 'stok', 'harga', 'kategori']}
         search={true}
         pagination={{
           enabled: true,

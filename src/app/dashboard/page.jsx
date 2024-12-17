@@ -3,6 +3,7 @@
 import BarChart from "@/components/barChart";
 import { useState, useEffect } from "react";
 import DonutChart from "@/components/donutChart";
+import Grid from "@/components/grid";
 
 function Dashboard() {
   const [isOpen, setIsOpen] = useState(false);
@@ -116,12 +117,15 @@ function Dashboard() {
         </div>
       </div>
     </div>
-    <div className="w-full flex flex-row justify-center items-center gap-9 mt-[10px]">
-      <div className="w-full border-2 ">
-        <h2 className="text-black font-semibold border-2 ">Laporan Penjualan</h2>
+    <div className="w-full flex flex-col-reverse lg:flex-row justify-center items-center gap-7 mt-[10px]">
+      <div className="w-full border-2 rounded-3xl ">
+        <p>Produk</p>
+        <div className="flex flex-row justify-center items-center gap-9 p-5">
+          <Grid />
+        </div>
       </div>
-      <div className="flex flex-col p-5 items-center w-[50%] border-2 rounded-3xl bg-white shadow-md justify-center">
-        <p className="text-black mb-[10px] font-bold">Produk terlaris</p>
+      <div className="flex flex-col w-full p-5 items-center lg:w-[50%] lg:h-[430px] border-2 rounded-3xl bg-white shadow-md justify-center">
+        <p className="text-black mb-[20px] font-bold">Produk terlaris</p>
         <div className=" flex flex-row justify-center items-center gap-9 ">
           < DonutChart />
         </div>
