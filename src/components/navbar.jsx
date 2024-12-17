@@ -14,7 +14,7 @@ export default function Navbar({ toggleSidebar, isOpen }) {
     };
     return (
         <div className="navbar flex bg-white w-full h-[60px] text-black sticky top-0 z-50 ">
-            <div className="flex w-full h-full items-center justify-between px-8">
+            <div className="flex w-full h-full items-center justify-between lg:px-8 px-5">
                 <BurgerButton onClick={toggleSidebar} isOpen={isOpen} />
                 <form onSubmit={handleSearch}>
                     <input

@@ -2,23 +2,23 @@
     "2023": {
       "products": [
         {
-          "name": "Product A",
+          "name": "Mie Goreng ",
           "sales": 5000
         },
         {
-          "name": "Product B",
+          "name": "Mie Rebus",
           "sales": 4000
         },
         {
-          "name": "Product C",
+          "name": "Rinso",
           "sales": 3000
         },
         {
-          "name": "Product D",
+          "name": "Ekonomi",
           "sales": 2000
         },
         {
-          "name": "Product E",
+          "name": "Beras Murni",
           "sales": 1000
         }
       ]

@@ -4,18 +4,32 @@ import React, { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import "../app/globals.css";
 
-// Dynamic import untuk ReactApexChart agar hanya di-render di client-side
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const BarChart = ({ period }) => {
-    const chartRef = useRef(null);
+   
+    // buat tampilan mobile si bar akan miring
+    const [isMobile, setIsMobile] = useState(false);
+    
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768); // tipe md breakpoint
+        };
+        
+        handleResize();
+        
+        window.addEventListener('resize', handleResize);
+        
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+
+    // ini buat styling si barChart dari apexChart
     const [state, setState] = useState({
-        series: [
-            {
-                name: 'Penjualan',
-                data: []
-            }
-        ],
+        series: [{
+            name: 'Penjualan',
+            data: []
+        }],
         options: {
             chart: {
                 type: 'bar',
@@ -39,27 +53,15 @@ const BarChart = ({ period }) => {
             },
             plotOptions: {
                 bar: {
-                    horizontal: false,
+                    horizontal: isMobile, // buat tampilan mobile si bar akan miring
                     columnWidth: '35%',
                     borderRadius: 5,
-                    //   borderRadiusApplication: 'all',
-                    //   borderRadiusWhenStacked: 'all',
                     barHeight: '70%',
                     distributed: false,
                     padding: {
                         left: 15,
                         right: 15
                     },
-                    roundedCorners: {
-                        top: true,
-                        bottom: true,
-                    },
-                    states: {
-                        hover: {
-                            enable: true,
-                            color: "#f5b041",
-                        },
-                    }
                 }
             },
             grid: {
@@ -118,25 +120,50 @@ const BarChart = ({ period }) => {
                     formatter: () => ''
                 },
                 style: {
-                    fontSize: '14px', // Mengatur ukuran font tooltip
+                    fontSize: '10px', // Mengatur ukuran font tooltip
                     fontFamily: 'Arial, sans-serif', // Mengatur jenis font tooltip
                     colors: '#000000', // Mengatur warna teks tooltip
                 },
                 marker: {
                     show: false,
+                },
+                dataLabels: {
+                    enabled: true,
+                    style: {
+                        fontSize: '12px',
+                        colors: ['#000000'],
+                    }
                 }
             },
         }
-    }
-    );
+    });
 
+    // ini buat ngecek kalo ada perubahan di state state.options.plotOptions.bar.horizontal
+    useEffect(() => {
+        setState(prevState => ({
+            ...prevState,
+            options: {
+                ...prevState.options,
+                plotOptions: {
+                    ...prevState.options.plotOptions,
+                    bar: {
+                        ...prevState.options.plotOptions.bar,
+                        horizontal: isMobile
+                    }
+                }
+            }
+        }));
+    }, [isMobile]);
+
+    // ini buat ngecek kalo ada perubahan di state state.options.xaxis.categories
     useEffect(() => {
         fetch("/data/penjualan.json")
             .then(response => response.json())
             .then((data) => {
-                // Get the most recent year's data (2024)
+                // ambil data otomatis dari 2024 ketika baru dibuka
                 const currentYearData = data[period];
 
+                // kurang tau ini pokoknya dari dokumentasi barChart harus gini biar bisa ambil data dari json
                 setState((prevState) => ({
                     ...prevState,
                     series: [
@@ -160,14 +187,16 @@ const BarChart = ({ period }) => {
     }, [period]);
     
     return (
-        <div className="w-full h-full transition-all duration-300">
+        <div className="h-full transition-all duration-400">
             <ReactApexChart
                 options={state.options}
                 series={state.series}
                 type="bar"
-                height={200}
-                width="100%"
+                height={isMobile ? 350 : 200}
+                width="95%"
             />
         </div>
     );
-}; export default BarChart;
+};
+
+export default BarChart;
