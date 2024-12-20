@@ -1,7 +1,7 @@
 'use client';
 
 import Sidebar from "@/components/sidebar";
-import Navbar from "@/components/navbar";
+import Topbar from "@/components/topbar";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import "../app/globals.css";
@@ -25,26 +25,28 @@ export default function RootLayout({ children }) {
                     </main>
                 </body>
             </html>
-        )
+        );
     }
 
     return (
         <html lang="en">
             <body>
-                {/* Pengecualian layout global untuk halaman login */}
-                    <div className="dashboard-layout flex">
-                        {/* Sidebar (Hidden on smaller screens) */}
-                        <div className={`hidden md:block ${isOpen ? '-translate-x-64' : 'translate-x-0'} transform transition-all duration-300`}>
-                            <Sidebar isOpen={isOpen} />
-                        </div>
-                        {/* Main content with Navbar */}
-                        <div className={`w-full transition-all duration-300 lg:${isOpen ? '-ml-64' : 'ml-0'}`}>
-                            <Navbar toggleSidebar={toggleSidebar} isOpen={isOpen} />
-                            <main className="p-4 bg-[#F5F5F5]">
-                                {children}
-                            </main>
-                        </div>
+                <div className="dashboard-layout flex h-screen overflow-x-hidden">
+                    {/* Sidebar */}
+                    <div
+                        className={`fixed md:relative top-0 left-0 z-50 transform transition-all duration-300 ease-in-out ${isOpen ? '-translate-x-64' : '-translate-x-0'}`}
+                    >
+                        <Sidebar isOpen={isOpen} />
                     </div>
+
+                    {/* Main content with Navbar */}
+                    <div className={`w-full transition-all duration-300 ease-in-out  lg:${isOpen ? '-ml-64' : 'ml-0'}`}>
+                        <Topbar toggleSidebar={toggleSidebar} isOpen={isOpen} />
+                        <main className="p-4 bg-[#F5F5F5] h-full overflow-x-hidden">
+                            {children}
+                        </main>
+                    </div>
+                </div>
             </body>
         </html>
     );

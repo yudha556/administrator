@@ -41,4 +41,4 @@ yarn-error.log*
 next-env.d.ts
 
 # file firebase yang sangat sensitif
-lib/firebase.js
+/src/lib/

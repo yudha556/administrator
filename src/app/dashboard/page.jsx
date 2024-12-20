@@ -60,7 +60,7 @@ function Dashboard() {
   }, [selectedPeriod]);
 
   return (
-    <div className={`flex flex-col gap-4 lg:p-6 ${isOpen ? 'ml-64' : ''} transform `}>
+    <div className={`flex flex-col gap-4 lg:p-2 ${isOpen ? 'ml-64' : ''} transform `}>
     <div className={`flex lg:flex-row flex-col transition-all duration-300 gap-5 ${isOpen ? 'ml-64' : ''} transform `}>
       <div className="lg:grid lg:grid-cols-2 flex-col gap-6 w-full flex justify-center">
         <div className="bg-white p-6 rounded-3xl shadow-md">

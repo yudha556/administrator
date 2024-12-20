@@ -1,7 +1,7 @@
 import BurgerButton from "./burgerButton";
 import { useState } from "react";
 
-export default function Navbar({ toggleSidebar, isOpen }) {
+export default function topbar ({ toggleSidebar, isOpen }) {
     const [searchTerm, setSearchTerm] = useState(''); // Menyimpan nilai input pencarian
 
     // Fungsi untuk menangani pencarian
