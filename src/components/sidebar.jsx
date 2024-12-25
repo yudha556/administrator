@@ -11,7 +11,7 @@ function Sidebar() {
     };
 
     return (
-        <div className={`flex flex-col justify-start gap-9 sticky top-0 z-10 h-screen bg-[#f5f5f5] shadow-[0_3px_10px_rgb(0,0,0,0.2)] text-gray-600 w-64 transition-transform duration-300 overflow-y-auto ${isOpen ? 'translate-x-64' : 'translate-x-0'}`}>
+        <div className={`flex flex-col  justify-start gap-9 sticky top-0 z-10 h-screen bg-[#f5f5f5] shadow-[0_3px_10px_rgb(0,0,0,0.2)] text-gray-600 w-64 transition-transform duration-300 overflow-y-auto ${isOpen ? 'translate-x-64' : 'translate-x-0'}`}>
             <h1 className="mt-[40px] text-blue-500 ml-6 font-bold text-2xl ">Teknologi WEB</h1>
             <div className="flex flex-col  mt-[20px] font-bold justify-between  w-full">
                 <button
