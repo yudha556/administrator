@@ -4,7 +4,6 @@ import BarChart from "@/components/barChart";
 import { useState, useEffect } from "react";
 import DonutChart from "@/components/donutChart";
 import Grid from "@/components/dashboardGrid";
-import Footer from "@/components/footer";
 
 function Dashboard() {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,7 +60,7 @@ function Dashboard() {
   }, [selectedPeriod]);
 
   return (
-    <div className={`flex flex-col gap-4 lg:p-5  ${isOpen ? 'ml-64' : ''} transform  h-screen overflow-y-auto mb-[30px]`}>
+    <div className={`flex flex-col gap-4 lg:p-5  ${isOpen ? 'ml-64' : ''} transform  h-full `}>
     <div className={`flex lg:flex-row flex-col transition-all duration-300 gap-5 ${isOpen ? 'ml-64' : ''} transform `}>
       <div className="lg:grid lg:grid-cols-2 flex-col gap-6 w-full flex justify-center">
         <div className="bg-white p-6 rounded-3xl shadow-md">
@@ -119,7 +118,8 @@ function Dashboard() {
       </div>
     </div>
     <div className="w-full flex flex-col-reverse lg:flex-row justify-center items-center gap-7 mt-[10px]">
-      <div className="w-full border-2 rounded-3xl ">
+      <div className="w-full  rounded-xl flex flex-col">
+        <p className="font-semibold text-sm ml-5 p-2 ">Popular Produk</p>
           <Grid />
       </div>
       <div className="flex flex-col w-full p-5 items-center lg:w-[50%] lg:h-[430px] border-2 rounded-3xl bg-white shadow-md justify-center">

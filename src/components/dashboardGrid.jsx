@@ -7,15 +7,15 @@ import { fetchProduk } from '@/helpers/fetchProduk';
 
 const useStyles = makeStyles({
   headerStyle: {
-    backgroundColor: '#DDDDDD',
+    backgroundColor: '#ffffff',
     fontWeight: 'bold',
-    color: '#333',
+    color: 'gray',
     paddingLeft: '16px',
     textAlign: 'center',
     
   },
   cellStyle: {
-    color: '#333',
+    color: 'gray',
     padding: '16px',
   }
 });
@@ -36,16 +36,6 @@ const DataGridWithFirebase = () => {
     fetchData();
   }, []);
 
-  const handleSearchChange = (e) => {
-    const searchValue = e.target.value.toLowerCase();
-    setSearchText(searchValue);
-
-    const filteredData = rows.filter((row) =>
-      row.nama.toLowerCase().includes(searchValue) ||
-      row.kategori.toLowerCase().includes(searchValue)
-    );
-    setFilteredRows(filteredData);
-  };
 
   const columns = [
     {
@@ -72,7 +62,7 @@ const DataGridWithFirebase = () => {
       field: 'stok',
       headerName: 'Stok',
       flex: 1,
-      minWidth: 110,
+      minWidth: 80,
       headerClassName: classes.headerStyle,
       cellClassName: classes.cellStyle,
       disableColumnMenu: true,
@@ -82,7 +72,7 @@ const DataGridWithFirebase = () => {
       field: 'harga',
       headerName: 'Harga',
       flex: 1,
-      minWidth: 110,
+      minWidth: 80,
       headerClassName: classes.headerStyle,
       cellClassName: classes.cellStyle,
       disableColumnMenu: true,
@@ -92,7 +82,7 @@ const DataGridWithFirebase = () => {
       field: 'kategori',
       headerName: 'Kategori',
       flex: 1,
-      minWidth: 150,
+      minWidth: 90,
       headerClassName: classes.headerStyle,
       cellClassName: classes.cellStyle,
       disableColumnMenu: true,
@@ -101,7 +91,7 @@ const DataGridWithFirebase = () => {
   ];
 
   return (
-        <div className='w-full border-none'>
+        <div className='w-full border-none rounded-2xl  bg-white '>
           <DataGrid
             rows={filteredRows}
             columns={columns}
@@ -109,19 +99,23 @@ const DataGridWithFirebase = () => {
             rowsPerPageOptions={[5]}
             rowHeight={60}
             pagination
-            style={{ width: '100%', height: 420 }}
+            style={{ width: '100%', height: 420, }}
             pageSizeOptions={[10, 100, { value: 1000, label: '1,000' }, { value: -1, label: 'All' }]}
             autoHeith={true}
             sx={{
+              borderRadius: '20px',
               '& .MuiDataGrid-columnHeaders': {
-                backgroundColor: '#DDDDDD',
+                backgroundColor: '',
+                paddingLeft: '32px',
                 
               },
               '& .MuiDataGrid-cell': {
-                border: 'none',
+                borderBottom: '1px solid #e0e0e0',
+                backgroundColor: '#ffffff',
                 padding: '0px 0',
                 textAlign: 'left',
-                marginLeft: '10px',
+                marginLeft: '0px',
+                paddingLeft: '32px',
               },
               '& .MuiDataGrid-row': {
                 marginBottom: '0px',
@@ -131,6 +125,8 @@ const DataGridWithFirebase = () => {
               '& .MuiDataGrid-columnHeaders': {
                 border: 'none',
                 textAlign: 'center',
+                transform: 'translateX(20px)',
+                
               },
               '& .MuiDataGrid-columnSeparator': {
                 display: 'none',

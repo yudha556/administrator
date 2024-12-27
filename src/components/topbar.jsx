@@ -1,7 +1,9 @@
 import BurgerButton from "./burgerButton";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function topbar ({ toggleSidebar, isOpen }) {
+    const router = useRouter();
     const [searchTerm, setSearchTerm] = useState(''); // Menyimpan nilai input pencarian
 
     // Fungsi untuk menangani pencarian
@@ -29,7 +31,7 @@ export default function topbar ({ toggleSidebar, isOpen }) {
                         Search
                     </button> */}
                 </form>
-                <img src="/logo.png" alt="Logo" className="w-10 h-10 border-2 rounded-full" />
+                <img src="/profil.jpg" alt="Logo" className="w-10 h-10 border-2 rounded-full cursor-pointer" onClick={() => router.push('/user')} />
             </div>
         </div>
     );
