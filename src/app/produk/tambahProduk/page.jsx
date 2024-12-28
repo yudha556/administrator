@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { tambahProduk } from '@/helpers/fetchProduk';
+import { updateProduk } from '@/helpers/fetchProduk';
 
 export default function TambahProduk() {
-    const [nama, setNama] = useState('');
+    const [nama, setNama] = useState(''); 
     const [harga, setHarga] = useState('');
     const [stok, setStok] = useState('');
     const [kategori, setKategori] = useState('');
@@ -23,7 +23,7 @@ export default function TambahProduk() {
         };
 
         try {
-            await tambahProduk(produkBaru);
+            await updateProduk( produkBaru);
             alert('Produk berhasil ditambahkan!');
             router.push('/produk');
         } catch (error) {

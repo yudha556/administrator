@@ -39,15 +39,15 @@ const hapusProduk = async (id) => {
 };
 
 // Update produk di Firestore
-const tambahProduk = async (produkBaru) => {
+const updateProduk = async (produkBaru) => {
   try {
-    const docRef = await addDoc(collection(db, 'Produk'), produkBaru);
-    console.log('Produk baru ditambahkan dengan ID:', docRef.id);
-    return docRef.id; 
+      const docRef = await addDoc(collection(db, 'Produk'), produkBaru);
+      console.log("Produk baru berhasil ditambahkan dengan ID:", docRef.id);
+      return docRef.id;
   } catch (error) {
-    console.error('Error menambahkan produk ke Firestore:', error);
-    throw error; 
+      console.error("Error menambahkan produk ke Firestore:", error);
+      throw error;
   }
 };
 
-export { fetchProduk, hapusProduk, tambahProduk };
+export { fetchProduk, hapusProduk, updateProduk };
