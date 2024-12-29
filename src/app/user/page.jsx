@@ -88,6 +88,32 @@ export default function user() {
 
                     </div>
                 </div>
+
+                <div className='border-t-2 w-full mt-7 gap-3 flex flex-col'>
+                    <h1 className='py-4 border-b-2 font-bold'>Pekerjaan</h1>
+                    <div className='w-full flex flex-col gap-4'>
+                        <div className='flex flex-row justify-between mx-5  border-b-2'>
+                            <div className='flex flex-col w-full'>
+                                <h1>Nama Pekerjaan</h1>
+                                <p>Developer</p>
+                            </div>
+                            <div className='flex flex-col w-full'>
+                                <h1>Pengalaman</h1>
+                                <p>1000 Tahun</p>
+                            </div>
+                        </div>
+                        <div className='flex flex-row justify-between mx-5  border-b-2'>
+                            <div className='flex flex-col w-full'>
+                                <h1>Alamat</h1>
+                                <p>Kab. Banjarnegara, kec. Pandanarum</p>
+                            </div>
+                            <div className='flex flex-col w-full'>
+                                <h1>Negara</h1>
+                                <p>Indonesia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

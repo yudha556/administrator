@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { updateProduk } from '@/helpers/fetchProduk';
+import { addProduk } from '@/helpers/fetchProduk';
+import Swal from 'sweetalert2';
 
 export default function TambahProduk() {
     const [nama, setNama] = useState(''); 
@@ -23,11 +24,28 @@ export default function TambahProduk() {
         };
 
         try {
-            await updateProduk( produkBaru);
-            alert('Produk berhasil ditambahkan!');
-            router.push('/produk');
+            await addProduk(produkBaru);
+            
+            // SweetAlert success
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: 'Produk berhasil ditambahkan.',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                // Redirect setelah alert OK
+                router.push('/produk');
+            });
         } catch (error) {
-            alert('Gagal menambahkan produk: ' + error.message);
+            // SweetAlert error
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: 'Gagal menambahkan produk: ' + error.message,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Coba Lagi'
+            });
         }
     };
 

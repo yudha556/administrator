@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import dynamic from 'next/dynamic';
 import { DataGrid } from '@mui/x-data-grid';
 import { makeStyles } from '@mui/styles';
-import { fetchProduk, hapusProduk, updateProduk } from '@/helpers/fetchProduk';
+import { fetchProduk, hapusProduk, updateProduk, addProduk } from '@/helpers/fetchProduk';
 import { IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -111,25 +111,43 @@ const DataGridWithFirebase = () => {
 
   // Buat Hapus Produk
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Apakah Anda yakin ingin menghapus produk ini?");
-    if (confirmDelete) {
-      try {
+    try {
+      const result = await Swal.fire({
+        title: 'Konfirmasi Hapus',
+        text: 'Apakah Anda yakin ingin menghapus produk ini?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, Hapus!',
+        cancelButtonText: 'Batal'
+      });
+  
+      if (result.isConfirmed) {
         await hapusProduk(id);
-
+  
         setRows((prevRows) => {
           const updatedRows = prevRows.filter((row) => row.id !== id);
           setFilteredRows(updatedRows);
           return updatedRows;
         });
-
-        alert("Produk berhasil dihapus.");
-      } catch (error) {
-        console.error("Error deleting data:", error);
-        alert("Terjadi kesalahan saat menghapus produk.");
+  
+        Swal.fire(
+          'Terhapus!',
+          'Produk berhasil dihapus.',
+          'success'
+        );
       }
+    } catch (error) {
+      console.error("Error deleting data:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Terjadi Kesalahan',
+        text: 'Gagal menghapus produk.'
+      });
     }
   };
-
+  
   // Mesin Pencarian Bang
   const handleSearchChange = (e) => {
     const searchValue = e.target.value.toLowerCase();
@@ -265,14 +283,6 @@ const DataGridWithFirebase = () => {
   return (
     <div>
       <div className="w-full flex flex-col gap-3 items-center justify-center">
-        {selectedRows.length > 0 && (
-          <button
-            onClick={handleBulkDelete}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Hapus {selectedRows.length} Produk Terpilih
-          </button>
-        )}
         
         <input
           type="text"
