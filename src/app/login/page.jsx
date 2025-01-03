@@ -2,31 +2,82 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { auth } from '@/lib/firebase';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+
 
 function LoginPage() {
     const router = useRouter();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
-    const [isRegister, setIsRegister] = useState(false); 
+    const [isRegister, setIsRegister] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (username === "admin" && password === "admin") {
-            router.push('/dashboard');
-        } else {
-            setError("Username atau password salah");
+        setError(''); // Reset error message
+    
+        try {
+            if (isRegister) {
+                // Register logic
+                if (password !== confirmPassword) {
+                    setError("Password tidak cocok");
+                    return;
+                }
+    
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                console.log("User registered:", user);
+                alert("Akun berhasil dibuat! Selamat datang, " + user.email);
+                setIsRegister(false); // Switch to login screen
+            } else {
+                // Login logic
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                console.log("Login berhasil:", user);
+                alert("Selamat datang kembali, " + user.email);
+                router.push('/dashboard'); // Redirect to dashboard
+    
+                // Handle "Remember Me" feature
+                if (rememberMe) {
+                    localStorage.setItem("email", email);
+                    localStorage.setItem("password", password);
+                } else {
+                    localStorage.removeItem("email");
+                    localStorage.removeItem("password");
+                }
+            }
+        } catch (error) {
+            console.error("Login/Registration error:", error.code, error.message);
+            
+            // Menampilkan pesan error yang lebih umum
+            let errorMessage = "Terjadi kesalahan, coba lagi.";
+    
+            if (error.code === 'auth/wrong-password') {
+                errorMessage = "Password yang Anda masukkan salah.";
+            } else if (error.code === 'auth/user-not-found') {
+                errorMessage = "Akun dengan email ini tidak ditemukan.";
+            } else if (error.code === 'auth/invalid-email') {
+                errorMessage = "Email yang Anda masukkan tidak valid.";
+            }
+            
+            setError(errorMessage); // Set error message for UI
         }
     };
+    
+    
+
 
     const handleClick = () => {
-        setIsRegister(!isRegister); 
+        setIsRegister(!isRegister);
     }
 
     return (
         <div className="relative w-full h-screen flex overflow-hidden">
             {/* Bagian Welcome */}
-            <div 
+            <div
                 className={`absolute top-0 left-0 w-1/2 h-full bg-blue-500 text-white flex justify-center items-center transition-transform duration-500 ${isRegister ? 'translate-x-full' : ''}`}
             >
                 <div className="flex flex-col gap-7">
@@ -39,16 +90,16 @@ function LoginPage() {
             </div>
 
             {/* Bagian Form Login/Register */}
-            <div 
+            <div
                 className={`absolute top-0 right-0 w-1/2 h-full bg-white text-black flex flex-col justify-center items-center transition-transform duration-500 ${isRegister ? '-translate-x-full' : ''}`}
             >
                 <div className="flex flex-col w-full lg:p-16 p-10 items-start">
                     <h1 className="font-bold text-3xl">{isRegister ? 'Register' : 'Sign In'}</h1>
                     <div className='flex flex-row gap-2 items-center'>
                         <p className="text-sm">{isRegister ? 'Sudah Punya Akun?' : 'Pengguna Baru?'}</p>
-                        <button 
-                        className="text-blue-600 hover:text-gray-600 cursor-pointer"
-                        onClick={handleClick}
+                        <button
+                            className="text-blue-600 hover:text-gray-600 cursor-pointer"
+                            onClick={handleClick}
                         >
                             {isRegister ? 'Login' : 'Buat Akun'}
                         </button>
@@ -57,20 +108,56 @@ function LoginPage() {
                 <div className="flex flex-col gap-6 w-full lg:p-16 p-10 text-black">
                     <h1 className="font-medium text-black">{isRegister ? 'Buat akun baru' : 'Login dengan akunmu'}</h1>
                     <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
-                        <input
-                            type="text"
-                            placeholder="Username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                        {!isRegister && (
+                            <>
+                            <input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             className="border-[1px] border-gray-300 rounded-md p-2 w-full"
+                            required
                         />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="border-[1px] border-gray-300 rounded-md p-2 w-full"
-                        />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="border-[1px] border-gray-300 rounded-md p-2 w-full"
+                                required
+                            />
+                        </>
+                            
+                        )}
+                        
+                        {isRegister && (
+                            <>
+                                <input
+                                type="email"
+                                placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="border-[1px] border-gray-300 rounded-md p-2 w-full"
+                                required
+                            />
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="border-[1px] border-gray-300 rounded-md p-2 w-full"
+                                    required
+                                />
+                                <input
+                                    type="password"
+                                    placeholder="Confirm Password"
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    className="border-[1px] border-gray-300 rounded-md p-2 w-full"
+                                    required
+                                />
+                            </>
+                        )}
                         <div className="flex gap-2 items-center">
                             <input type="checkbox" id="remember" name="remember" className="w-4 h-4 cursor-pointer accent-blue-600 hover:accent-blue-600 transition-colors" />
                             <label htmlFor="remember" className='text-black'>Remember me</label>
@@ -84,6 +171,4 @@ function LoginPage() {
             </div>
         </div>
     );
-}
-
-export default LoginPage;
+}export default LoginPage;

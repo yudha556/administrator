@@ -62,27 +62,27 @@ export default function user() {
                         <div className='flex flex-row justify-between mx-5  border-b-2'>
                             <div className='flex flex-col w-full'>
                                 <h1>Full Name</h1>
-                                <p>Hendrian Yudha Pratama</p>
+                                <p className='text-gray-500'>Hendrian Yudha Pratama</p>
                             </div>
                             <div className='flex flex-col w-full'>
                                 <h1>Email</h1>
-                                <p>hendrian.yudha@gmail.com</p>
+                                <p className='text-gray-500'>hendrian.yudha@gmail.com</p>
                             </div>
                         </div>
                         <div className='flex flex-row justify-between mx-5  border-b-2'>
                             <div className='flex flex-col w-full'>
                                 <h1>No Telepon</h1>
-                                <p>+62 856 0145 5805</p>
+                                <p className='text-gray-500'>+62 856 0145 5805</p>
                             </div>
                             <div className='flex flex-col w-full'>
                                 <h1>Negara</h1>
-                                <p>Indonesia</p>
+                                <p className='text-gray-500'>Indonesia</p>
                             </div>
                         </div>
                         <div className='flex flex-row justify-between mx-5  border-b-2'>
                             <div className='flex flex-col w-full'>
                                 <h1>Alamat</h1>
-                                <p>Kab. Banjarnegara, Kec. Pandanarum</p>
+                                <p className='text-gray-500'>Kab. Banjarnegara, Kec. Pandanarum</p>
                             </div>
                         </div>
 
@@ -95,21 +95,21 @@ export default function user() {
                         <div className='flex flex-row justify-between mx-5  border-b-2'>
                             <div className='flex flex-col w-full'>
                                 <h1>Nama Pekerjaan</h1>
-                                <p>Developer</p>
+                                <p className='text-gray-500'>Developer</p>
                             </div>
                             <div className='flex flex-col w-full'>
                                 <h1>Pengalaman</h1>
-                                <p>1000 Tahun</p>
+                                <p className='text-gray-500'>1000 Tahun</p>
                             </div>
                         </div>
                         <div className='flex flex-row justify-between mx-5  border-b-2'>
                             <div className='flex flex-col w-full'>
                                 <h1>Alamat</h1>
-                                <p>Kab. Banjarnegara, kec. Pandanarum</p>
+                                <p className='text-gray-500'>Kab. Banjarnegara, kec. Pandanarum</p>
                             </div>
                             <div className='flex flex-col w-full'>
                                 <h1>Negara</h1>
-                                <p>Indonesia</p>
+                                <p className='text-gray-500'>Indonesia</p>
                             </div>
                         </div>
                     </div>
