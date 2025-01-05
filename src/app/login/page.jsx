@@ -41,13 +41,13 @@ function LoginPage() {
                 router.push('/dashboard'); // Redirect to dashboard
     
                 // Handle "Remember Me" feature
-                if (rememberMe) {
-                    localStorage.setItem("email", email);
-                    localStorage.setItem("password", password);
-                } else {
-                    localStorage.removeItem("email");
-                    localStorage.removeItem("password");
-                }
+                // if (rememberMe) {
+                //     localStorage.setItem("email", email);
+                //     localStorage.setItem("password", password);
+                // } else {
+                //     localStorage.removeItem("email");
+                //     localStorage.removeItem("password");
+                // }
             }
         } catch (error) {
             console.error("Login/Registration error:", error.code, error.message);
@@ -78,11 +78,11 @@ function LoginPage() {
         <div className="relative w-full h-screen flex overflow-hidden">
             {/* Bagian Welcome */}
             <div
-                className={`absolute top-0 left-0 w-1/2 h-full bg-blue-500 text-white flex justify-center items-center transition-transform duration-500 ${isRegister ? 'translate-x-full' : ''}`}
+                className={`absolute top-0 left-0 w-1/2 h-full bg-primary-blue  flex justify-center items-center transition-transform duration-500 ${isRegister ? 'translate-x-full' : ''}`}
             >
                 <div className="flex flex-col gap-7">
-                    <h1 className="font-bold lg:text-4xl text-xl md:text-2xl xl:text-3xl mt-[40px] lg:mt-0">Hallo admin selamat Datang</h1>
-                    <div className="flex flex-col">
+                    <h1 className="font-bold lg:text-4xl text-xl md:text-2xl xl:text-3xl mt-[40px] lg:mt-0 text-primary-text-dark">Hallo admin selamat Datang</h1>
+                    <div className="flex flex-col text-primary-text-dark text-lg">
                         <p className="font-bold lg:text-lg text-sm">Kamu berada di perusahaan yang bagus</p>
                         <p className="lg:text-sm text-xs mt-[10px] lg:mt-0">Kelola produk kamu di sini</p>
                     </div>
@@ -91,10 +91,10 @@ function LoginPage() {
 
             {/* Bagian Form Login/Register */}
             <div
-                className={`absolute top-0 right-0 w-1/2 h-full bg-white text-black flex flex-col justify-center items-center transition-transform duration-500 ${isRegister ? '-translate-x-full' : ''}`}
+                className={`absolute top-0 right-0 w-1/2 h-full bg-dark-bg dark:bg-primary-bg text-primary-text-dark dark:text-primary-text flex flex-col justify-center items-center transition-transform duration-500 ${isRegister ? '-translate-x-full' : ''}`}
             >
-                <div className="flex flex-col w-full lg:p-16 p-10 items-start">
-                    <h1 className="font-bold text-3xl">{isRegister ? 'Register' : 'Sign In'}</h1>
+                <div className="flex flex-col w-full lg:p-16 p-10 items-start text-primary-text-dark dark:text-primary-text">
+                    <h1 className="font-bold text-3xl text-primary-text-dark dark:text-primary-text">{isRegister ? 'Register' : 'Sign In'}</h1>
                     <div className='flex flex-row gap-2 items-center'>
                         <p className="text-sm">{isRegister ? 'Sudah Punya Akun?' : 'Pengguna Baru?'}</p>
                         <button
@@ -105,9 +105,9 @@ function LoginPage() {
                         </button>
                     </div>
                 </div>
-                <div className="flex flex-col gap-6 w-full lg:p-16 p-10 text-black">
-                    <h1 className="font-medium text-black">{isRegister ? 'Buat akun baru' : 'Login dengan akunmu'}</h1>
-                    <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
+                <div className="flex flex-col gap-6 w-full lg:p-16 p-10 ">
+                    <h1 className="font-medium text-primary-text-dark dark:text-primary-text text-xl">{isRegister ? 'Buat akun baru' : 'Login dengan akunmu'}</h1>
+                    <form onSubmit={handleSubmit} className='flex flex-col gap-6 '>
                         {!isRegister && (
                             <>
                             <input
@@ -115,7 +115,7 @@ function LoginPage() {
                             placeholder="Email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="border-[1px] border-gray-300 rounded-md p-2 w-full"
+                            className="border-[1px] border-gray-300 rounded-md p-2 w-full bg-dark-bg dark:bg-primary-bg"
                             required
                         />
                             <input
@@ -123,7 +123,7 @@ function LoginPage() {
                                 placeholder="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="border-[1px] border-gray-300 rounded-md p-2 w-full"
+                                className="border-[1px] border-gray-300 rounded-md p-2 w-full bg-dark-bg dark:bg-primary-bg"
                                 required
                             />
                         </>
@@ -137,7 +137,7 @@ function LoginPage() {
                                 placeholder="Email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="border-[1px] border-gray-300 rounded-md p-2 w-full"
+                                className="border-[1px] border-gray-300 rounded-md p-2 w-full bg-dark dark:bg-primary-bg"
                                 required
                             />
                                 <input
@@ -145,7 +145,7 @@ function LoginPage() {
                                     placeholder="Password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="border-[1px] border-gray-300 rounded-md p-2 w-full"
+                                    className="border-[1px] border-gray-300 rounded-md p-2 w-full bg-dark dark:bg-primary-bg"
                                     required
                                 />
                                 <input
@@ -153,14 +153,14 @@ function LoginPage() {
                                     placeholder="Confirm Password"
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
-                                    className="border-[1px] border-gray-300 rounded-md p-2 w-full"
+                                    className="border-[1px] border-gray-300 rounded-md p-2 w-full bg-dark-bg dark:bg-primary-bg"
                                     required
                                 />
                             </>
                         )}
                         <div className="flex gap-2 items-center">
                             <input type="checkbox" id="remember" name="remember" className="w-4 h-4 cursor-pointer accent-blue-600 hover:accent-blue-600 transition-colors" />
-                            <label htmlFor="remember" className='text-black'>Remember me</label>
+                            <label htmlFor="remember" className='text-primary-text-dark dark:text-primary-text'>Remember me</label>
                             {error && <p style={{ color: 'red' }}>{error}</p>}
                         </div>
                         <button type='submit' className="py-2 rounded-md bg-blue-500 hover:bg-gray-600 transition-all hover:text-lg text-white font-semibold">

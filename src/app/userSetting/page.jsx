@@ -76,16 +76,16 @@ export default function userSetting() {
     }, [])
 
     return (
-        <div className="h-full w-full bg-[#f5f5f5]  flex p-5  gap-5 justify-center items-center">
+        <div className="h-full w-full   flex p-5  gap-5 justify-center items-center">
             <div className="w-[60%]  flex flex-col rounded-xl shadow-lg overflow-hidden">
                 <div className="w-full h-[200px]">
                     <img src="./contoh_sampul.jpeg" className="w-full h-full object-cover" alt="Deskripsi Gambar" />
                 </div>
-                <div className="bg-white w-full h-full flex flex-col justify-center items-center">
+                <div className="bg-gray-dark dark:bg-gray-light w-full h-full flex flex-col justify-center items-center">
                     <div className="flex flex-col gap-6 justify-center items-center w-[90%] translate-y-[-20%] p-5">
                         <img src="./profil.jpg" className="rounded-full w-28 border-4 border-black "></img>
                         <div className="flex flex-col justify-center items-center w-full ">
-                            <h1 className="font-semibold text-xl ">Hendrian Yudha Pratama</h1>
+                            <h1 className="font-semibold text-xl text-primary-text-dark dark:text-primary-text ">Hendrian Yudha Pratama</h1>
                             <ul className="flex flex-row gap-5 mt-5 text-sm font-gray-500">
                                 <li className='flex flex-row gap-2 items-center'>
                                     <Suitcase size={24} weight="duotone" />
@@ -123,12 +123,12 @@ export default function userSetting() {
                 </div>
             </div>
 
-            <div className='w-full flex flex-col gap-3 rounded-xl bg-white shadow-lg p-8'>
+            <div className='w-full flex flex-col gap-3 rounded-xl bg-gray-dark dark:bg-gray-light shadow-lg p-8'>
                 <form onSubmit={handleSubmit}>
-                    <div className='w-full flex flex-col gap-3 text-gray-500'>
+                    <div className='w-full flex flex-col gap-3 '>
                         <div className='w-full flex flex-row justify-between items-center '>
-                            <h1 className='py-4 border-b-2 font-bold text-black'>Perusahaan apa ini</h1>
-                            <button type="button" className='opacity-[50%] hover:opacity-[100%] transition-opacity duration-200 text-black py-2 px-4 rounded-lg flex gap-2' onClick={() => handleEdit('detailPerusahaan')}>
+                            <h1 className='py-4 border-b-2 border-primary-bg dark:border-dark-bg font-bold text-primary-text-dark dark:text-primary-text'>Perusahaan apa ini</h1>
+                            <button type="button" className='opacity-[50%] hover:opacity-[100%] transition-opacity duration-200 text-primary-text-dark dark:primary-text py-2 px-4 rounded-lg flex gap-2' onClick={() => handleEdit('detailPerusahaan')}>
                                 <PencilLine size={24} weight="duotone" />
                                 Edit
                             </button>
@@ -137,37 +137,37 @@ export default function userSetting() {
                     </div>
                     <div className='w-full mt-7 gap-3 flex flex-col'>
                         <div className='w-full flex flex-row justify-between items-center '>
-                            <h1 className='py-4 border-b-2 font-bold'>Personal Detail</h1>
-                            <button type="button" className='opacity-[50%] hover:opacity-[100%] transition-opacity duration-200 text-black py-2 px-4 rounded-lg flex gap-2' onClick={() => handleEdit('fullName')}>
+                            <h1 className='py-4 border-b-2 border-primary-bg dark:border-dark-bg font-bold text-xl text-primary-text-dark dark:text-primary-text'>Personal Detail</h1>
+                            <button type="button" className='opacity-[50%] hover:opacity-[100%] transition-opacity duration-200 text-primary-text-dark dark:text-primary-text py-2 px-4 rounded-lg flex gap-2' onClick={() => handleEdit('fullName')}>
                                 <PencilLine size={24} weight="duotone" />
                                 Edit
                             </button>
                         </div>
                         <div className='w-full flex flex-col gap-4'>
-                            <div className='flex flex-row justify-between mx-5  border-b-2'>
+                            <div className='flex flex-row justify-between mx-5  border-b-2 border-primary-bg dark:border-dark-bg' >
                                 <div className='flex flex-col w-full'>
-                                    <h1>Full Name</h1>
-                                    <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} className='text-gray-500' />
+                                    <h1 className='text-primary-text-dark dark:text-primary-text font-bold text-lg'>Full Name</h1>
+                                    <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} className='bg-gray-dark dark:bg-gray-light' />
                                 </div>
                                 <div className='flex flex-col w-full'>
-                                    <h1>Email</h1>
-                                    <p className='text-gray-500'>{email ? email : 'loading Email....'}</p>
-                                </div>
-                            </div>
-                            <div className='flex flex-row justify-between mx-5  border-b-2'>
-                                <div className='flex flex-col w-full'>
-                                    <h1>No Telepon</h1>
-                                    <input type="text" name="noTelepon" value={formData.noTelepon} onChange={handleInputChange} className='text-gray-500' />
-                                </div>
-                                <div className='flex flex-col w-full'>
-                                    <h1>Negara</h1>
-                                    <input type="text" name="negara" value={formData.negara} onChange={handleInputChange} className='text-gray-500' />
+                                    <h1 className='text-primary-text-dark dark:text-primary-text font-bold text-lg'>Email</h1>
+                                    <p className='bg-gray-dark dark:bg-gray-light'>{email ? email : 'loading Email....'}</p>
                                 </div>
                             </div>
-                            <div className='flex flex-row justify-between mx-5  border-b-2'>
+                            <div className='flex flex-row justify-between mx-5  border-b-2 border-primary-bg dark:border-dark-bg'>
                                 <div className='flex flex-col w-full'>
-                                    <h1>Alamat</h1>
-                                    <input type="text" name="alamat" value={formData.alamat} onChange={handleInputChange} className='text-gray-500' />
+                                    <h1 className='text-primary-text-dark dark:text-primary-text font-bold text-lg'>No Telepon</h1>
+                                    <input type="text" name="noTelepon" value={formData.noTelepon} onChange={handleInputChange} className='bg-gray-dark dark:bg-gray-light' />
+                                </div>
+                                <div className='flex flex-col w-full'>
+                                    <h1 className='text-primary-text-dark dark:text-primary-text font-bold text-lg'>Negara</h1>
+                                    <input type="text" name="negara" value={formData.negara} onChange={handleInputChange} className='bg-gray-dark dark:bg-gray-light' />
+                                </div>
+                            </div>
+                            <div className='flex flex-row justify-between mx-5  border-b-2 border-primary-bg dark:border-dark-bg'>
+                                <div className='flex flex-col w-full'>
+                                    <h1 className='text-primary-text-dark dark:text-primary-text font-bold text-lg'>Alamat</h1>
+                                    <input type="text" name="alamat" value={formData.alamat} onChange={handleInputChange} className='bg-gray-dark dark:bg-gray-light' />
                                 </div>
                             </div>
                         </div>
@@ -175,21 +175,21 @@ export default function userSetting() {
 
                     <div className=' w-full mt-7 gap-3 flex flex-col'>
                         <div className='w-full flex flex-row justify-between items-center '>
-                            <h1 className='py-4 border-b-2 font-bold'>Pekerjaan</h1>
-                            <button type="button" className='opacity-[50%] hover:opacity-[100%] transition-opacity duration-200 text-black py-2 px-4 rounded-lg flex gap-2' onClick={() => handleEdit('namaPekerjaan')}>
+                            <h1 className='py-4 border-b-2 border-primary-bg dark:border-dark-bg font-bold text-xl text-primary-text-dark dark:text-primary-text'>Pekerjaan</h1>
+                            <button type="button" className='opacity-[50%] hover:opacity-[100%] transition-opacity duration-200 text-primary-text-dark dark:text-primary-text py-2 px-4 rounded-lg flex gap-2' onClick={() => handleEdit('namaPekerjaan')}>
                                 <PencilLine size={24} weight="duotone" />
                                 Edit
                             </button>
                         </div>
                         <div className='w-full flex flex-col gap-4'>
-                            <div className='flex flex-row justify-between mx-5  border-b-2'>
+                            <div className='flex flex-row justify-between mx-5  border-b-2 border-primary-bg dark:border-dark-bg'>
                                 <div className='flex flex-col w-full'>
-                                    <h1>Nama Pekerjaan</h1>
-                                    <input type="text" name="namaPekerjaan" value={formData.namaPekerjaan} onChange={handleInputChange} className='text-gray-500' />
+                                    <h1 className='text-primary-text-dark dark:text-primary-text font-bold text-lg'>Nama Pekerjaan</h1>
+                                    <input type="text" name="namaPekerjaan" value={formData.namaPekerjaan} onChange={handleInputChange} className='bg-gray-dark dark:bg-gray-light' />
                                 </div>
                                 <div className='flex flex-col w-full'>
-                                    <h1>Pengalaman</h1>
-                                    <input type="text" name="pengalaman" value={formData.pengalaman} onChange={handleInputChange} className='text-gray-500' />
+                                    <h1 className='text-primary-text-dark dark:text-primary-text font-bold text-lg'>Pengalaman</h1>
+                                    <input type="text" name="pengalaman" value={formData.pengalaman} onChange={handleInputChange} className='bg-gray-dark dark:bg-gray-light' />
                                 </div>
                             </div>
                         </div>

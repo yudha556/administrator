@@ -7,7 +7,7 @@ import { fetchProduk } from '@/helpers/fetchProduk';
 
 const useStyles = makeStyles({
   headerStyle: {
-    backgroundColor: '#ffffff',
+    // backgroundColor: '#ffffff',
     fontWeight: 'bold',
     color: 'gray',
     paddingLeft: '16px',
@@ -91,7 +91,7 @@ const DataGridWithFirebase = () => {
   ];
 
   return (
-        <div className='w-full border-none rounded-2xl  bg-white '>
+        <div className='w-full border-none rounded-2xl  bg-gray-darkx dark:bg-white '>
           <DataGrid
             rows={filteredRows}
             columns={columns}
@@ -105,13 +105,13 @@ const DataGridWithFirebase = () => {
             sx={{
               borderRadius: '20px',
               '& .MuiDataGrid-columnHeaders': {
-                backgroundColor: '',
+                
                 paddingLeft: '32px',
                 
               },
               '& .MuiDataGrid-cell': {
-                borderBottom: '1px solid #e0e0e0',
-                backgroundColor: '#ffffff',
+                // borderBottom: '1px solid #e0e0e0',
+                // backgroundColor: '#ffffff',
                 padding: '0px 0',
                 textAlign: 'left',
                 marginLeft: '0px',

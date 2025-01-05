@@ -1,6 +1,6 @@
 export default function statistik() {
     return (
-        <div>
+        <div className="h-screen">
             <h1>Hello world</h1>
         </div>
     )

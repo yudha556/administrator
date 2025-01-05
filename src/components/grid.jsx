@@ -267,7 +267,7 @@ const DataGridWithFirebase = () => {
       disableColumnMenu: true,
       disableColumnSort: true,
       renderCell: (params) => (
-        <div>
+        <div className='text-primary-text-dark '>
           <IconButton onClick={() => handleEdit(params.row)}>
             <EditIcon />
           </IconButton>
@@ -281,7 +281,7 @@ const DataGridWithFirebase = () => {
 
 
   return (
-    <div>
+    <div className=''>
       <div className="w-full flex flex-col gap-3 items-center justify-center">
         
         <input
@@ -289,10 +289,10 @@ const DataGridWithFirebase = () => {
           placeholder="Cari produk..."
           value={searchText}
           onChange={handleSearchChange}
-          className="w-full mt-7 hover:border-black p-2 border border-gray-300 rounded-sm flex mb-4 max-w-screen-lg"
+          className="w-full mt-7 hover:border-black p-2 border border-dark-bg bg-gray-dark dark:bg-primary-bg rounded-sm flex mb-4 max-w-screen-lg"
         />
 
-        <div className='w-full border-none'>
+        <div className='w-full border-none bg-gray-dark dark:bg-primary-bg'>
           <DataGrid
             rows={filteredRows}
             columns={columns}

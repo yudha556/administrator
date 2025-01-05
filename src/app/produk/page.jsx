@@ -50,7 +50,7 @@ export default function Produk() {
                 </button>
             </div>
 
-            <div className='w-full h-auto bg-white rounded-2xl'>
+            <div className='w-full h-auto  rounded-2xl'>
                 <Grid />
             </div>
         </div>

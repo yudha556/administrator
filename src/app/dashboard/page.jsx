@@ -60,12 +60,12 @@ function Dashboard() {
   }, [selectedPeriod]);
 
   return (
-    <div className={`flex flex-col gap-4 lg:p-5  ${isOpen ? 'ml-64' : ''} transform  h-full `}>
-    <div className={`flex lg:flex-row flex-col transition-all duration-300 gap-5 ${isOpen ? 'ml-64' : ''} transform `}>
+    <div className={`flex flex-col gap-4 lg:p-5   ${isOpen ? 'ml-64' : ''} transform  h-full  `}>
+    <div className={`flex lg:flex-row flex-col  gap-5 ${isOpen ? 'ml-64' : ''} transform `}>
       <div className="lg:grid lg:grid-cols-2 flex-col gap-6 w-full flex justify-center">
-        <div className="bg-white p-6 rounded-3xl shadow-md">
+        <div className=" p-6 rounded-3xl shadow-xl bg-gray-dark dark:bg-white">
           <h2 className="text-gray-500 font-semibold">Pendapatan</h2>
-          <p className="text-2xl font-bold mt-2 text-black">
+          <p className="text-2xl font-bold mt-2 ">
             Rp {dashboardData?.revenue?.toLocaleString('id-ID') || "0"}
           </p>
           <p className={`text-sm mt-1 ${Number(dashboardData?.changes?.revenue) >= 0 ? 'text-green-500' : 'text-red-500'}`}>
@@ -73,33 +73,33 @@ function Dashboard() {
           </p>
         </div>
 
-        <div className="bg-white p-6 rounded-3xl shadow-md">
+        <div className="bg-gray-dark dark:bg-white  p-6 rounded-3xl shadow-xl">
           <h2 className="text-gray-500 font-semibold">Pembelian Berulang</h2>
-          <p className="text-2xl font-bold mt-2 text-black">
+          <p className="text-2xl font-bold mt-2 ">
             Rp {dashboardData?.repeatPurchase?.toLocaleString('id-ID') || "0"}
           </p>
           <p className={`text-sm mt-1 ${Number(dashboardData?.changes?.repeatPurchase) >= 0 ? 'text-green-500' : 'text-red-500'}`}>
             {Number(dashboardData?.changes?.repeatPurchase) >= 0 ? '+' : ''}{dashboardData?.changes?.repeatPurchase}%
           </p>        </div>
-        <div className="bg-white p-6 rounded-3xl shadow-md">
+        <div className="bg-gray-dark dark:bg-white p-6 rounded-3xl shadow-xl">
           <h2 className="text-gray-500 font-semibold">Rata-rata Pesanan</h2>
-          <p className="text-2xl font-bold mt-2 text-black">
+          <p className="text-2xl font-bold mt-2 ">
             Rp {dashboardData?.averageOrder?.toLocaleString('id-ID') || '0'}
           </p>
           <p className={`text-sm mt-1 ${Number(dashboardData?.changes?.averageOrder) >= 0 ? 'text-green-500' : 'text-red-500'}`}>
             {Number(dashboardData?.changes?.averageOrder) >= 0 ? '+' : ''}{dashboardData?.changes?.averageOrder}%
           </p>          </div>
-        <div className="bg-white p-6 rounded-3xl shadow-md">
+        <div className="bg-gray-dark dark:bg-white p-6 rounded-3xl shadow-xl">
           <h2 className="text-gray-500 font-semibold">Pelanggan Baru</h2>
-          <p className="text-2xl font-bold mt-2 text-black">{dashboardData.newCustomers}</p>
+          <p className="text-2xl font-bold mt-2 ">{dashboardData.newCustomers}</p>
           <p className={`text-sm mt-1 ${Number(dashboardData?.changes?.newCustomers) >= 0 ? 'text-green-500' : 'text-red-500'}`}>
             {Number(dashboardData?.changes?.newCustomers) >= 0 ? '+' : ''}{dashboardData?.changes?.newCustomers}%
           </p>        </div>
       </div>
 
-      <div className="bg-white p-6 rounded-3xl shadow-md w-full h-full">
+      <div className=" p-6 rounded-3xl shadow-xl w-full h-full bg-gray-dark dark:bg-primary-bg">
         <div className="flex justify-between items-center">
-          <h2 className="text-black font-semibold">Laporan Penjualan</h2>
+          <h2 className="text-primary-text-dark dark:text-primary-text font-semibold">Laporan Penjualan</h2>
           <div>
             <select
               className="border-2 border-black text-black px-3 py-1 rounded-lg text-sm"
@@ -112,7 +112,7 @@ function Dashboard() {
             </select>
           </div>
         </div>
-        <div className={`mt-[30px]  ${isOpen ? 'ml-64' : ''} transform transition-all duration-300`}>
+        <div className={`mt-[30px]  ${isOpen ? 'ml-64' : ''} transform transition-all duration-300 `}>
           <BarChart period={selectedPeriod} isSidebarOpen={isOpen} style={`${isOpen ? 'w-[95%]' : 'w-[100%]'} transform transition-all duration-300`} />
         </div>
       </div>
@@ -122,8 +122,8 @@ function Dashboard() {
         <p className="font-semibold text-sm ml-5 p-2 ">Popular Produk</p>
           <Grid />
       </div>
-      <div className="flex flex-col w-full p-5 items-center lg:w-[50%] lg:h-[430px] border-2 rounded-3xl bg-white shadow-md justify-center">
-        <p className="text-black mb-[20px] font-bold">Produk terlaris</p>
+      <div className="flex flex-col w-full p-5 items-center lg:w-[50%] lg:h-[430px]  rounded-3xl bg-gray-dark dark:bg-white shadow-xl justify-center">
+        <p className=" mb-[20px] font-bold">Produk terlaris</p>
         <div className=" flex flex-row justify-center items-center gap-9 ">
           < DonutChart />
         </div>

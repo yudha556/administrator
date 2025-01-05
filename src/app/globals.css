@@ -2,23 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground: #0a0a0a;
-  --background: #ededed;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground: #0a0a0a;
-    --background: #ededed;
-  }
-}
-
+/* globals.css */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.custom-class {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Tema Terang (Light Mode) */
+html {
+  background-color: white;
+  color: black;
+}
+
+/* Tema Gelap (Dark Mode) */
+html.dark {
+  background-color: #2d2d2d;
+  color: white;
+}
+
+
 
 .apexcharts-tooltip {
   color: #000000 ; /* Memaksa teks menjadi hitam */

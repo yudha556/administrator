@@ -36,7 +36,7 @@ const DonutChart = ({ period = "2023" }) => {
                   fontWeight: 'bold',
                   color: '#000000',
                   formatter: function (val) {
-                    return `Rp ${val.toLocaleString()}`; // Format angka total dengan "Rp"
+                    return `Rp ${val.toLocaleString()}`; 
                   }
                 }
             }
@@ -44,7 +44,7 @@ const DonutChart = ({ period = "2023" }) => {
         }
       },
       dataLabels: {
-        enabled: false, // Nonaktifkan dataLabels default untuk menghindari penambahan nilai di luar donut
+        enabled: false,
       },
       tooltip: {
         enabled: true,
@@ -55,16 +55,16 @@ const DonutChart = ({ period = "2023" }) => {
         },
         y: {
           formatter: function (val) {
-            return "Rp " + val.toLocaleString(); // Format tooltip dengan "Rp"
+            return "Rp " + val.toLocaleString(); 
           }
         }
       },
-      colors: ['#006BFF', "#4379F2", '#08C2FF', '#77CDFF'], // Warna untuk setiap bagian donut
+      colors: ['#006BFF', "#4379F2", '#08C2FF', '#77CDFF'], 
       legend: {
-        position: 'bottom', // Menempatkan legend di bawah donut chart
+        position: 'bottom',
         horizontalAlign: 'center',
         labels: {
-          useSeriesColors: true, // Gunakan warna seri untuk legend
+          useSeriesColors: true, 
         },
       },
     }

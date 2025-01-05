@@ -50,7 +50,7 @@ export default function TambahProduk() {
     };
 
     return (
-        <div className='border-2 border-black w-full h-full p-4'>
+        <div className=' w-full h-full p-4'>
             <h1 className='text-xl mb-4'>Tambah Produk Baru</h1>
             <form onSubmit={handleSubmit}>
                 <div className='mb-2'>
