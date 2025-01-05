@@ -6,25 +6,20 @@ import { DataGrid } from '@mui/x-data-grid';
 import { makeStyles } from '@mui/styles';
 import { fetchProduk, hapusProduk, updateProduk, addProduk } from '@/helpers/fetchProduk';
 import { IconButton } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { PencilSimpleLine, TrashSimple } from 'phosphor-react';
+import '@/app/globals.css';
 
-
-// styling coba coba ada yang jadi ada yang ngga
 const useStyles = makeStyles({
   headerStyle: {
-    backgroundColor: '#DDDDDD',
+    backgroundColor: 'transparent',
     fontWeight: 'bold',
-    color: '#333',
+    color: 'gray',
+    paddingLeft: '16px',
+    textAlign: 'center',
   },
   cellStyle: {
-    color: '#333',
-  },
-  checkBoxStyle: {
-    color: '#333',
-    width: '100%',
-    border: '1px solid #ccc',
-    transform: 'scale(2)',
+    color: 'gray',
+    padding: '16px',
   }
 });
 
@@ -34,7 +29,7 @@ const DataGridWithFirebase = () => {
   const [filteredRows, setFilteredRows] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
 
-  const classes = useStyles(); 
+  const classes = useStyles();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -203,14 +198,12 @@ const DataGridWithFirebase = () => {
     }
   };
 
-  
-
   const columns = [
     {
       field: 'nama',
       headerName: 'Nama',
       flex: 1,
-      minWidth: 150,
+      minWidth: 80,
       headerClassName: classes.headerStyle,
       cellClassName: classes.cellStyle,
       disableColumnMenu: true,
@@ -220,7 +213,7 @@ const DataGridWithFirebase = () => {
       field: 'tanggal',
       headerName: 'Tanggal',
       flex: 1,
-      minWidth: 110,
+      minWidth: 100,
       headerClassName: classes.headerStyle,
       cellClassName: classes.cellStyle,
       disableColumnMenu: true,
@@ -230,7 +223,7 @@ const DataGridWithFirebase = () => {
       field: 'stok',
       headerName: 'Stok',
       flex: 1,
-      minWidth: 110,
+      minWidth: 80,
       headerClassName: classes.headerStyle,
       cellClassName: classes.cellStyle,
       disableColumnMenu: true,
@@ -240,7 +233,7 @@ const DataGridWithFirebase = () => {
       field: 'harga',
       headerName: 'Harga',
       flex: 1,
-      minWidth: 110,
+      minWidth: 80,
       headerClassName: classes.headerStyle,
       cellClassName: classes.cellStyle,
       disableColumnMenu: true,
@@ -250,7 +243,7 @@ const DataGridWithFirebase = () => {
       field: 'kategori',
       headerName: 'Kategori',
       flex: 1,
-      minWidth: 150,
+      minWidth: 90,
       headerClassName: classes.headerStyle,
       cellClassName: classes.cellStyle,
       disableColumnMenu: true,
@@ -266,23 +259,21 @@ const DataGridWithFirebase = () => {
       disableColumnMenu: true,
       disableColumnSort: true,
       renderCell: (params) => (
-        <div className='text-primary-text-dark '>
+        <div className='text-primary-text-dark dark:text-primary-text'>
           <IconButton onClick={() => handleEdit(params.row)}>
-            <EditIcon />
+            <PencilSimpleLine className="text-primary-text-dark dark:text-primary-text" />
           </IconButton>
           <IconButton onClick={() => handleDelete(params.row.id)}>
-            <DeleteIcon />
+            <TrashSimple className="text-primary-text-dark dark:text-primary-text" />
           </IconButton>
         </div>
       ),
     }
   ];
 
-
   return (
     <div className=''>
       <div className="w-full flex flex-col gap-3 items-center justify-center">
-        
         <input
           type="text"
           placeholder="Cari produk..."
@@ -291,7 +282,7 @@ const DataGridWithFirebase = () => {
           className="w-full mt-7 hover:border-black p-2 border border-dark-bg bg-gray-dark dark:bg-primary-bg rounded-sm flex mb-4 max-w-screen-lg"
         />
 
-        <div className='w-full border-none bg-gray-dark dark:bg-primary-bg'>
+        <div className='w-full border-none rounded-2xl bg-gray-darkx dark:bg-white'>
           <DataGrid
             rows={filteredRows}
             columns={columns}
@@ -301,29 +292,30 @@ const DataGridWithFirebase = () => {
             disableRowSelectionOnClick
             pageSize={5}
             rowsPerPageOptions={[5]}
-            rowHeight={80}
+            rowHeight={60}
             pagination
-            style={{ width: '100%', height: 520 }}
+            style={{ width: '100%', height: 420 }}
             pageSizeOptions={[10, 100, { value: 1000, label: '1,000' }, { value: -1, label: 'All' }]}
             autoHeith={true}
             isRowSelectable={(params) => true}
             sx={{
-              '& .MuiDataGrid-columnHeaders': {
-                backgroundColor: '#DDDDDD',
-              },
-              '& .MuiDataGrid-columnHeaderCheckbox': {
-                backgroundColor: '#DDDDDD',
-              },
+              border: 'none',
               '& .MuiDataGrid-cell': {
-                border: 'none',
                 padding: '0px 0',
+                textAlign: 'left',
+                marginLeft: '0px',
+                paddingLeft: '32px',
               },
               '& .MuiDataGrid-row': {
                 marginBottom: '0px',
                 marginTop: '0px',
+                borderBottom: 'none',
               },
               '& .MuiDataGrid-columnHeaders': {
                 border: 'none',
+                textAlign: 'center',
+                transform: 'translateX(20px)',
+                background: 'none',
               },
               '& .MuiDataGrid-columnSeparator': {
                 display: 'none',
@@ -359,4 +351,3 @@ const DataGridWithFirebase = () => {
 };
 
 export default DataGridWithFirebase;
-

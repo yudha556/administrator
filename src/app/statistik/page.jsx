@@ -93,10 +93,10 @@ export default function statistik() {
                 </div>
             </div>
             <div className="flex w-full mt-10 lg:flex-row flex-col gap-5">
-                <div className=" p-6 rounded-3xl shadow-xl w-full h-full bg-gray-dark dark:bg-primary-bg">
+                <div className=" lg:p-6 rounded-3xl shadow-xl w-full h-full bg-gray-dark dark:bg-primary-bg">
                     <StatistikPage />
                 </div>
-                <div className="w-80 bg-gray-dark dark:bg-primary-bg rounded-3xl shadow-xl p-6">
+                <div className="w-80 h-[450px] bg-gray-dark dark:bg-primary-bg rounded-3xl shadow-xl p-6">
                     <Radikal />
                 </div>
             </div>

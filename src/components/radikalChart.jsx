@@ -23,14 +23,14 @@ const RadialChart = () => {
               show: true,
               fontSize: '20px',
               fontWeight: 'bold',
-              color: '#000',
+              color: '#808080',
               offsetY: 5,
             },
             value: {
               show: true,
               fontSize: '18px',
               fontWeight: 'bold',
-              color: '#000',
+              color: '#808080',
             },
           },
         },
@@ -49,7 +49,7 @@ const RadialChart = () => {
               fontSize: '15px',
               fontWeight: 'thin',
               labels: {
-                colors: '#000',
+                colors: '#808080',
               },
               markers: {
                 size: 6
@@ -66,7 +66,7 @@ const RadialChart = () => {
 
   return (
     <div className="radial-chart ">
-      <h3 className='mb-2'>Produk Terlaris Sepanjang Tahun</h3>
+      <h3 className='mb-2 text-gray-500'>Produk Terlaris Sepanjang Tahun</h3>
       <ReactApexChart
         options={chartData.options}
         series={chartData.series}

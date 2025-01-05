@@ -118,9 +118,11 @@ function Dashboard() {
         </div>
       </div>
       <div className="w-full flex flex-col-reverse lg:flex-row justify-center items-center gap-7 mt-[10px]">
-        <div className="w-full  rounded-xl flex flex-col">
+        <div className="w-full   rounded-xl flex flex-col">
           <p className="font-semibold text-sm ml-5 p-2 ">Popular Produk</p>
-          <Grid />
+          <div className="w-full flex flex-col gap-2 bg-gray-dark rounded-3xl">
+            <Grid />
+          </div>
         </div>
         <div className="flex flex-col w-full p-5 items-center lg:w-[50%] lg:h-[430px]  rounded-3xl bg-gray-dark dark:bg-white shadow-xl justify-center">
           <p className=" mb-[20px] font-bold">Produk terlaris</p>

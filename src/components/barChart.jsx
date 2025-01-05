@@ -69,7 +69,8 @@ const BarChart = ({ period }) => {
                     easing: 'easeinout',
                     speed: 300
                 },
-                foreColor: theme === 'dark' ? '#fff' : '#000' // Ini untuk keseluruhan teks
+
+                foreColor: theme === 'dark' ? '#808080' : '#808080' // Mengubah warna teks menjadi abu-abu
             },
             plotOptions: {
                 bar: {
@@ -99,7 +100,8 @@ const BarChart = ({ period }) => {
                 categories: [],
                 labels: {
                     style: {
-                        colors: theme === 'dark' ? '#fff' : '#000', // Ini agar warna xaxis berubah
+
+                        colors: theme === 'dark' ? '#808080' : '#808080', // Mengubah warna teks menjadi abu-abu
                     }
                 },
                 axisBorder: {
@@ -113,12 +115,14 @@ const BarChart = ({ period }) => {
                 title: {
                     text: 'Rp (pendapatan)',
                     style: {
-                        color: theme === 'dark' ? '#fff' : '#000', // Ini agar warna yaxis berubah
+
+                        color: theme === 'dark' ? '#808080' : '#808080', // Mengubah warna teks menjadi abu-abu
                     }
                 },
                 labels: {
                     style: {
-                        colors: theme === 'dark' ? '#fff' : '#000', // Ini agar warna yaxis berubah
+
+                        colors: theme === 'dark' ? '#808080' : '#808080', // Mengubah warna teks menjadi abu-abu
                     }
                 }
             },
@@ -145,7 +149,8 @@ const BarChart = ({ period }) => {
                 style: {
                     fontSize: '10px', // Mengatur ukuran font tooltip
                     fontFamily: 'Arial, sans-serif', // Mengatur jenis font tooltip
-                    colors: 'var(--text-color)', // Mengatur warna teks tooltip
+
+                    colors: '#808080', // Mengubah warna teks menjadi abu-abu
                 },
                 marker: {
                     show: false,
@@ -154,7 +159,8 @@ const BarChart = ({ period }) => {
                     enabled: true,
                     style: {
                         fontSize: '12px',
-                        colors: ['var(--text-color)'],
+
+                        colors: ['#808080'], // Mengubah warna teks menjadi abu-abu
                     }
                 }
             },
@@ -220,7 +226,7 @@ const BarChart = ({ period }) => {
             />
         </div>
     );
-};
 
+};
 export default BarChart;
                                      

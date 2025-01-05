@@ -20,9 +20,9 @@ const StatistikPage = () => {
                 height: 350,
                 type: 'area',
                 toolbar: {
-                    show: true,  // Pastikan toolbar terlihat
+                    show: true,
                     tools: {
-                        download: true, // Menampilkan hanya tombol download
+                        download: true,
                         zoom: false,
                         zoomin: false,
                         zoomout: false,
@@ -30,7 +30,36 @@ const StatistikPage = () => {
                         reset: false
                     }
                 },
+                redrawOnWindowResize: true,
+                redrawOnParentResize: true
             },
+            responsive: [{
+                breakpoint: 768,
+                options: {
+                    chart: {
+                        height: 300
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }, {
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        height: 250
+                    },
+                    legend: {
+                        position: 'bottom'
+                    },
+                    xaxis: {
+                        labels: {
+                            rotate: -45,
+                            maxHeight: 60
+                        }
+                    }
+                }
+            }],
             dataLabels: {
                 enabled: false
             },
@@ -39,12 +68,12 @@ const StatistikPage = () => {
                 width: 5
             },
             fill: {
-                opacity: 1,  // Transparansi bayangan yang lebih pekat (0.3 untuk lebih terang)
-                type: 'gradient',  // Gunakan tipe solid untuk area bawah garis
+                opacity: 1,
+                type: 'gradient',
                 gradient: {
-                    shadeIntensity: 0.9, // Intensitas bayangan
-                    opacityFrom: 0.7, // Opacity untuk bagian bawah grafik
-                    opacityTo: 0.2, // Opacity untuk bagian atas grafik
+                    shadeIntensity: 0.9,
+                    opacityFrom: 0.7,
+                    opacityTo: 0.2,
                     stops: [0, 100]
                 }
             },
@@ -79,11 +108,11 @@ const StatistikPage = () => {
                 }
             },
             grid: {
-                show: false  // Menghilangkan garis grid
+                show: false
             },
             legend: {
-                position: 'top',  // Menampilkan legenda di bagian atas
-                horizontalAlign: 'center'  // Menyelaraskan legenda secara horizontal
+                position: 'top',
+                horizontalAlign: 'center'
             }
         }
     });
@@ -101,16 +130,13 @@ const StatistikPage = () => {
     };
 
     useEffect(() => {
-        // Fetch data from JSON file
         fetch("/data/keuntungan.json")
             .then(response => response.json())
             .then(data => {
-                // Cek apakah data dan tahun yang dipilih ada
                 if (data && data[selectedYear1] && data[selectedYear2]) {
                     const keuntunganData1 = data[selectedYear1].keuntungan;
                     const keuntunganData2 = data[selectedYear2].keuntungan;
 
-                    // Update chart with new data for the selected years
                     setState(prevState => ({
                         ...prevState,
                         series: [
@@ -131,33 +157,36 @@ const StatistikPage = () => {
             .catch(error => {
                 console.error("Error fetching data:", error);
             });
-    }, [selectedYear1, selectedYear2]); // Re-fetch data whenever year selection changes
+    }, [selectedYear1, selectedYear2]);
 
     return (
-        <div>
-            <div className="mb-4">
-                <label className="mr-2">Pilih Tahun 1:</label>
-                <select value={selectedYear1} onChange={handleYearChange} className='text-primary-text rounded-sm text-sm'>
-                    <option value="2024">2024</option>
-                    <option value="2023">2023</option>
-                    <option value="2022">2022</option>
-                    <option value="2021">2021</option>
-                </select>
+        <div className="w-full">
+            <div className="mb-4 flex flex-col sm:flex-row items-center gap-2 p-6">
+                <div className="flex items-center">
+                    <label className="mr-2 whitespace-nowrap">Pilih Tahun 1:</label>
+                    <select value={selectedYear1} onChange={handleYearChange} className='text-primary-text rounded-sm text-sm w-full sm:w-auto'>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                    </select>
+                </div>
 
-                <label className="ml-4 mr-2">Pilih Tahun 2:</label>
-                <select value={selectedYear2} onChange={handleYearChange} className='text-primary-text rounded-sm text-sm'>
-                    <option value="2024">2024</option>
-                    <option value="2023">2023</option>
-                    <option value="2022">2022</option>
-                    <option value="2021">2021</option>
-                </select>
+                <div className="flex items-center">
+                    <label className="mr-2 whitespace-nowrap">Pilih Tahun 2:</label>
+                    <select value={selectedYear2} onChange={handleYearChange} className='text-primary-text rounded-sm text-sm w-full sm:w-auto'>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                    </select>
+                </div>
             </div>
             
-            <div id="chart">
-                <ReactApexChart options={state.options} series={state.series} type="area" height={350} />
+            <div id="chart" className="w-full">
+                <ReactApexChart options={state.options} series={state.series} type="area" height={350} width="100%" />
             </div>
         </div>
     );
 }
-
 export default StatistikPage;

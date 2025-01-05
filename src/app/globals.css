@@ -57,3 +57,23 @@ html.dark {
   --background-color: #000; /* Background for dark mode */
 }
 
+.css-jscorc-MuiDataGrid-root .MuiDataGrid-container--top [role="row"],
+.css-jscorc-MuiDataGrid-root .MuiDataGrid-container--bottom [role="row"] {
+    background-color: transparent !important;
+}
+
+.css-jscorc-MuiDataGrid-root .MuiDataGrid-actions button svg {
+  color: gray !important;
+}
+
+.MuiTablePagination-actions button svg {
+  fill: gray; /* Mengubah warna ikon menjadi abu-abu (gray) */
+}
+
+.MuiTablePagination-displayedRows {
+  color: gray; /* Mengubah warna teks menjadi abu-abu */
+  font-size: 14px; /* Mengubah ukuran font */
+  font-weight: bold; /* Membuat teks menjadi tebal */
+}
+
+
