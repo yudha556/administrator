@@ -69,7 +69,6 @@ const BarChart = ({ period }) => {
                     easing: 'easeinout',
                     speed: 300
                 },
-
                 foreColor: theme === 'dark' ? '#808080' : '#808080' // Mengubah warna teks menjadi abu-abu
             },
             plotOptions: {
@@ -100,7 +99,6 @@ const BarChart = ({ period }) => {
                 categories: [],
                 labels: {
                     style: {
-
                         colors: theme === 'dark' ? '#808080' : '#808080', // Mengubah warna teks menjadi abu-abu
                     }
                 },
@@ -115,13 +113,11 @@ const BarChart = ({ period }) => {
                 title: {
                     text: 'Rp (pendapatan)',
                     style: {
-
                         color: theme === 'dark' ? '#808080' : '#808080', // Mengubah warna teks menjadi abu-abu
                     }
                 },
                 labels: {
                     style: {
-
                         colors: theme === 'dark' ? '#808080' : '#808080', // Mengubah warna teks menjadi abu-abu
                     }
                 }
@@ -149,7 +145,6 @@ const BarChart = ({ period }) => {
                 style: {
                     fontSize: '10px', // Mengatur ukuran font tooltip
                     fontFamily: 'Arial, sans-serif', // Mengatur jenis font tooltip
-
                     colors: '#808080', // Mengubah warna teks menjadi abu-abu
                 },
                 marker: {
@@ -159,7 +154,6 @@ const BarChart = ({ period }) => {
                     enabled: true,
                     style: {
                         fontSize: '12px',
-
                         colors: ['#808080'], // Mengubah warna teks menjadi abu-abu
                     }
                 }
@@ -226,7 +220,6 @@ const BarChart = ({ period }) => {
             />
         </div>
     );
-
 };
 export default BarChart;
                                      

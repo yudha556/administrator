@@ -1,5 +1,6 @@
-import { db } from '@/lib/firebase';  
+import { db, auth } from '@/lib/firebase';  
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
 
 // Ambil data pengguna berdasarkan userId
 export const getUserData = async (userId) => {
@@ -22,5 +23,26 @@ export const updateUserData = async (userId, newUserData) => {
     console.log("Profile updated successfully!");
   } catch (error) {
     console.error("Error updating profile:", error);
+  }
+};
+
+// Fungsi untuk mengubah password
+export const changeUserPassword = async (oldPassword, newPassword) => {
+  try {
+    const user = auth.currentUser;
+    const credential = EmailAuthProvider.credential(
+      user.email,
+      oldPassword
+    );
+    
+    // Re-authenticate user
+    await reauthenticateWithCredential(user, credential);
+    
+    // Update password
+    await updatePassword(user, newPassword);
+    
+    return { success: true };
+  } catch (error) {
+    throw error;
   }
 };

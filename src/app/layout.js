@@ -65,7 +65,7 @@ export default function RootLayout({ children }) {
                         isOpen ? 'ml-0 lg:-ml-64' : 'ml-0 lg:ml-0'
                     }`}>
                         <Topbar toggleSidebar={toggleSidebar} isOpen={isOpen} toggleTheme={toggleTheme} theme={theme} />
-                        <main className={`p-4 lg:p-6 flex-1 overflow-y-auto transition-all duration-300 `}>
+                        <main className={`p-4 lg:p-6  overflow-y-auto transition-all duration-300 `}>
                             {children}
                         </main>
                     </div>
