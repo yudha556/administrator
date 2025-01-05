@@ -46,3 +46,14 @@ html.dark {
 .apexcharts-tooltip-series-group {
   display: none; /* Menghilangkan ikon bulat */
 }
+
+:root {
+  --text-color: #000; /* Default to black (light mode) */
+  --background-color: #fff; /* Background for light mode */
+}
+
+[data-theme="dark"] {
+  --text-color: #fff; /* White text for dark mode */
+  --background-color: #000; /* Background for dark mode */
+}
+

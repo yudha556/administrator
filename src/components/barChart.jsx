@@ -1,12 +1,14 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import "../app/globals.css";
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const BarChart = ({ period }) => {
+    // tema
+    const [theme, setTheme] = useState('light');
    
     // buat tampilan mobile si bar akan miring
     const [isMobile, setIsMobile] = useState(false);
@@ -23,6 +25,23 @@ const BarChart = ({ period }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    useEffect(() => {
+        const detectTheme = () => {
+            const htmlElement = document.documentElement;
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+        };
+
+        detectTheme(); // cek tema pas loadng
+        window.addEventListener('storage', detectTheme); // cek tema pas reload
+
+        return () => {
+            window.removeEventListener('storage', detectTheme);
+        };
+    }, []);
 
     // ini buat styling si barChart dari apexChart
     const [state, setState] = useState({
@@ -49,7 +68,8 @@ const BarChart = ({ period }) => {
                     enabled: true,
                     easing: 'easeinout',
                     speed: 300
-                }
+                },
+                foreColor: theme === 'dark' ? '#fff' : '#000' // Ini untuk keseluruhan teks
             },
             plotOptions: {
                 bar: {
@@ -77,10 +97,9 @@ const BarChart = ({ period }) => {
             },
             xaxis: {
                 categories: [],
-                label: {
+                labels: {
                     style: {
-                        colors: 'gray',
-
+                        colors: theme === 'dark' ? '#fff' : '#000', // Ini agar warna xaxis berubah
                     }
                 },
                 axisBorder: {
@@ -88,14 +107,18 @@ const BarChart = ({ period }) => {
                 },
                 axisTicks: {
                     show: false
-                },
+                }
             },
-
             yaxis: {
                 title: {
                     text: 'Rp (pendapatan)',
                     style: {
-                        color: 'black',
+                        color: theme === 'dark' ? '#fff' : '#000', // Ini agar warna yaxis berubah
+                    }
+                },
+                labels: {
+                    style: {
+                        colors: theme === 'dark' ? '#fff' : '#000', // Ini agar warna yaxis berubah
                     }
                 }
             },
@@ -104,7 +127,7 @@ const BarChart = ({ period }) => {
             },
             tooltip: {
                 enabled: true, // Mengaktifkan tooltip
-                theme: 'light', // Mengubah tema tooltip (dark/light)
+                theme: 'dark', // Mengubah tema tooltip (dark/light)
                 x: {
                     show: true, // Menampilkan label X saat hover
                     formatter: function (val) {
@@ -122,7 +145,7 @@ const BarChart = ({ period }) => {
                 style: {
                     fontSize: '10px', // Mengatur ukuran font tooltip
                     fontFamily: 'Arial, sans-serif', // Mengatur jenis font tooltip
-                    colors: '#000000', // Mengatur warna teks tooltip
+                    colors: 'var(--text-color)', // Mengatur warna teks tooltip
                 },
                 marker: {
                     show: false,
@@ -131,7 +154,7 @@ const BarChart = ({ period }) => {
                     enabled: true,
                     style: {
                         fontSize: '12px',
-                        colors: ['#000000'],
+                        colors: ['var(--text-color)'],
                     }
                 }
             },
@@ -200,3 +223,4 @@ const BarChart = ({ period }) => {
 };
 
 export default BarChart;
+                                     

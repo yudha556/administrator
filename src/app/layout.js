@@ -48,24 +48,21 @@ export default function RootLayout({ children }) {
 
     return (
         <html lang="en" className={theme}>
-            <body className="min-h-screen overflow-hidden bg-dark-bg dark:bg-primary-bg text-primary-text-dark dark:text-primary-text">
+            <body className="min-h-screen bg-dark-bg dark:bg-primary-bg text-primary-text-dark dark:text-primary-text">
                 <CssBaseline />
-                <div className="dashboard-layout flex min-h-screen overflow-hidden">
+                <div className="dashboard-layout flex min-h-screen">
                     {/* Sidebar */}
                     <div
-                        className={`md:relative sticky top-0 left-0 z-50 transform transition-all duration-300 ease-in-out ${isOpen ? '-translate-x-64' : '-translate-x-0'}`}
+                        className={`md:relative fixed top-0 left-0 z-50 transform transition-all duration-300 ease-in-out ${isOpen ? '-translate-x-64' : '-translate-x-0'}`}
                     >
                         <Sidebar isOpen={isOpen} />
                     </div>
 
                     {/* Main content with Topbar */}
-                    <div className={`w-full transition-all duration-300 ease-in-out ${isOpen ? '-ml-64' : 'ml-0'}`}>
+                    <div className={`flex-1 flex flex-col transition-all duration-300 ease-in-out ${isOpen ? '-ml-64' : 'ml-0'}`}>
                         <Topbar toggleSidebar={toggleSidebar} isOpen={isOpen} toggleTheme={toggleTheme} theme={theme} />
-                        <main className="p-4 h-full overflow-y-auto">
+                        <main className="p-4 flex-1 overflow-y-auto">
                             {children}
-                            <div className="w-full mt-10">
-                                <Footer />
-                            </div>
                         </main>
                     </div>
                 </div>

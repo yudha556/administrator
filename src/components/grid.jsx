@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import dynamic from 'next/dynamic';
 import { DataGrid } from '@mui/x-data-grid';
 import { makeStyles } from '@mui/styles';
 import { fetchProduk, hapusProduk, updateProduk, addProduk } from '@/helpers/fetchProduk';

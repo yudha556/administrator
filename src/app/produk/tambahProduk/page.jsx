@@ -51,13 +51,13 @@ export default function TambahProduk() {
 
     return (
         <div className=' w-full h-full p-4'>
-            <h1 className='text-xl mb-4'>Tambah Produk Baru</h1>
+            <h1 className='text-xl mb-4 text-primary-text-dark dark:text-primary-text'>Tambah Produk Baru</h1>
             <form onSubmit={handleSubmit}>
                 <div className='mb-2'>
                     <label className='block'>Nama Produk:</label>
                     <input 
                         type='text' 
-                        className='border p-2 w-full' 
+                        className='border p-2 w-full bg-dark-bg dark:bg-primary-bg border-gray-500 dark:border-primary-text-dark' 
                         value={nama} 
                         onChange={(e) => setNama(e.target.value)} 
                         required
@@ -67,7 +67,7 @@ export default function TambahProduk() {
                     <label className='block'>Harga:</label>
                     <input 
                         type='number' 
-                        className='border p-2 w-full' 
+                        className='border p-2 w-full bg-dark-bg dark:bg-primary-bg border-gray-500 dark:border-primary-text-dark' 
                         value={harga} 
                         onChange={(e) => setHarga(e.target.value)} 
                         required
@@ -77,7 +77,7 @@ export default function TambahProduk() {
                     <label className='block'>Stok:</label>
                     <input 
                         type='number' 
-                        className='border p-2 w-full' 
+                        className='border p-2 w-full bg-dark-bg dark:bg-primary-bg border-gray-500 dark:border-primary-text-dark' 
                         value={stok} 
                         onChange={(e) => setStok(e.target.value)} 
                         required
@@ -87,7 +87,7 @@ export default function TambahProduk() {
                     <label className='block'>Kategori:</label>
                     <input 
                         type='text' 
-                        className='border p-2 w-full' 
+                        className='border p-2 w-full bg-dark-bg dark:bg-primary-bg border-gray-500 dark:border-primary-text-dark' 
                         value={kategori} 
                         onChange={(e) => setKategori(e.target.value)} 
                         required
