@@ -69,6 +69,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 Deployment ke Vercel sedang dalam proses. Namun, di Vercel, hanya tampilan frontend yang akan disertakan, sementara backend Firebase tidak akan diikutsertakan.
 
 
-| Catatan        | Detail                                                                                       |
-|----------------|-----------------------------------------------------------------------------------------------|
-| ⚠️ Catatan     | Firebase tidak dapat di-deploy secara otomatis bersamaan dengan aplikasi di Vercel. Jika Anda ingin menggunakan Firebase sebagai backend, Anda perlu menghubungkannya secara manual setelah melakukan deployment frontend di Vercel. |
+
+| **⚠️ Catatan** Firebase tidak dapat di-deploy secara otomatis bersamaan dengan aplikasi di Vercel. Jika Anda ingin menggunakan Firebase sebagai backend, Anda perlu menghubungkannya secara manual setelah melakukan deployment frontend di Vercel. |
