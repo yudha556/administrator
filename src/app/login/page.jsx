@@ -75,7 +75,7 @@ function LoginPage() {
     }
 
     return (
-        <div className="relative w-full h-screen flex overflow-hidden">
+        <div className="relative w-full h-screen flex lg:flex-row flex-col overflow-hidden">
             {/* Bagian Welcome */}
             <div
                 className={`absolute top-0 left-0 w-1/2 h-full bg-primary-blue  flex justify-center items-center transition-transform duration-500 ${isRegister ? 'translate-x-full' : ''}`}
