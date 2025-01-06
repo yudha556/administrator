@@ -1,5 +1,5 @@
 
-# THis is Last Project Web Technology
+# This is Last Project Web Technology
 Ini adalah proyek akhir untuk mata kuliah Teknologi Web. Dalam proyek ini, saya mengembangkan aplikasi web administrator menggunakan Next.js sebagai framework frontend dan Firebase sebagai backend. Proyek ini berfokus pada desain antarmuka pengguna agar ramah pengguna dan responsif, sehingga dapat diakses dari berbagai perangkat.
 
 
