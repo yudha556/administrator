@@ -70,4 +70,4 @@ Deployment ke Vercel sedang dalam proses. Namun, di Vercel, hanya tampilan front
 
 
 
-| **⚠️ Catatan** Firebase tidak dapat di-deploy secara otomatis bersamaan dengan aplikasi di Vercel. Jika Anda ingin menggunakan Firebase sebagai backend, Anda perlu menghubungkannya secara manual setelah melakukan deployment frontend di Vercel. |
+> **⚠️ Catatan** Firebase tidak dapat di-deploy secara otomatis bersamaan dengan aplikasi di Vercel. Jika Anda ingin menggunakan Firebase sebagai backend, Anda perlu menghubungkannya secara manual setelah melakukan deployment frontend di Vercel.
