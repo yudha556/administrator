@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import StatistikPage from '@/components/splineArea';
+import dynamic from 'next/dynamic';
 const BarChart = dynamic(() => import('@/components/barChart'), {
     ssr: false,
   });

@@ -14,18 +14,18 @@ const BarChart = ({ period }) => {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
-        if (isBrowser) {
-            const handleResize = () => {
-                setIsMobile(window.innerWidth < 768); // tipe md breakpoint
-            };
-            
-            handleResize();
-            
-            window.addEventListener('resize', handleResize);
-            
-            return () => window.removeEventListener('resize', handleResize);
+        if (typeof window !== 'undefined') {
+          const handleResize = () => {
+            setIsMobile(window.innerWidth < 768); // tipe md breakpoint
+          };
+          
+          handleResize();
+          
+          window.addEventListener('resize', handleResize);
+          
+          return () => window.removeEventListener('resize', handleResize);
         }
-    }, []);
+      }, []);
 
     useEffect(() => {
         if (isBrowser) {
