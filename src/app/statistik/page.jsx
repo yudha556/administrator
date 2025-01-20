@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import StatistikPage from '@/components/splineArea';
-import BarChart from "@/components/barChart";
+const BarChart = dynamic(() => import('@/components/barChart'), {
+    ssr: false,
+  });
 import Kalender from "@/components/kalender";
 import Radikal from "@/components/radikalChart";
 
