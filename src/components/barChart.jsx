@@ -5,23 +5,16 @@ import dynamic from 'next/dynamic';
 import "../app/globals.css";
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
-
+const isBrowser = typeof window !== 'undefined';
 const BarChart = ({ period }) => {
     // tema
     const [theme, setTheme] = useState('light');
    
     // buat tampilan mobile si bar akan miring
     const [isMobile, setIsMobile] = useState(false);
-    const [isWindowAvailable, setIsWindowAvailable] = useState(false);
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setIsWindowAvailable(true);
-        }
-    }, []);
-
-    useEffect(() => {
-        if (isWindowAvailable) {
+        if (isBrowser) {
             const handleResize = () => {
                 setIsMobile(window.innerWidth < 768); // tipe md breakpoint
             };
@@ -32,10 +25,10 @@ const BarChart = ({ period }) => {
             
             return () => window.removeEventListener('resize', handleResize);
         }
-    }, [isWindowAvailable]);
+    }, []);
 
     useEffect(() => {
-        if (isWindowAvailable) {
+        if (isBrowser) {
             const detectTheme = () => {
                 const htmlElement = document.documentElement;
                 if (htmlElement.classList.contains('dark')) {
@@ -52,7 +45,8 @@ const BarChart = ({ period }) => {
                 window.removeEventListener('storage', detectTheme);
             };
         }
-    }, [isWindowAvailable]);
+    }, []);
+
 
     // ini buat styling si barChart dari apexChart
     const [state, setState] = useState({
@@ -174,7 +168,7 @@ const BarChart = ({ period }) => {
 
     // ini buat ngecek kalo ada perubahan di state state.options.plotOptions.bar.horizontal
     useEffect(() => {
-        if (isWindowAvailable) {
+        if (isBrowser) {
             setState(prevState => ({
                 ...prevState,
                 options: {
@@ -189,11 +183,11 @@ const BarChart = ({ period }) => {
                 }
             }));
         }
-    }, [isMobile, isWindowAvailable]);
+    }, [isMobile]);
 
     // ini buat ngecek kalo ada perubahan di state state.options.xaxis.categories
     useEffect(() => {
-        if (isWindowAvailable) {
+        if (isBrowser) {
             fetch("/data/penjualan.json")
                 .then(response => response.json())
                 .then((data) => {
@@ -222,7 +216,7 @@ const BarChart = ({ period }) => {
                     console.error("Error fetching data", error);
                 });
         }
-    }, [period, isWindowAvailable]);
+    }, [period]);
     
     return (
         <div className="h-full transition-all duration-400">
