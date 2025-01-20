@@ -10,40 +10,39 @@ const BarChart = ({ period }) => {
     // tema
     const [theme, setTheme] = useState('light');
    
-    // buat tampilan mobile si bar akan miring
+    // Untuk tampilan mobile (jika ukuran layar kecil, bar akan miring)
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-          const handleResize = () => {
-            setIsMobile(window.innerWidth < 768); // tipe md breakpoint
-          };
-          
-          handleResize();
-          
-          window.addEventListener('resize', handleResize);
-          
-          return () => window.removeEventListener('resize', handleResize);
+            // Handle perubahan ukuran layar
+            const handleResize = () => {
+                setIsMobile(window.innerWidth < 768); // Tipe md breakpoint
+            };
+            handleResize(); // Cek saat pertama kali load
+            window.addEventListener('resize', handleResize);
+            return () => window.removeEventListener('resize', handleResize);
         }
-      }, []);
+    }, []);
 
     useEffect(() => {
-        if (isBrowser) {
+        if (typeof window !== 'undefined') {
+            // Deteksi tema awal berdasarkan elemen HTML
             const detectTheme = () => {
-                const htmlElement = document.documentElement;
-                if (htmlElement.classList.contains('dark')) {
-                    setTheme('dark');
-                } else {
-                    setTheme('light');
-                }
+                const isDarkMode = document.documentElement.classList.contains('dark');
+                setTheme(isDarkMode ? 'dark' : 'light');
             };
+            
+            detectTheme(); // Cek tema saat pertama kali load
 
-            detectTheme(); // cek tema pas loadng
-            window.addEventListener('storage', detectTheme); // cek tema pas reload
+            // Untuk mendeteksi perubahan tema secara manual
+            const observer = new MutationObserver(() => detectTheme());
+            observer.observe(document.documentElement, {
+                attributes: true,
+                attributeFilter: ['class'], // Pantau perubahan class pada elemen HTML
+            });
 
-            return () => {
-                window.removeEventListener('storage', detectTheme);
-            };
+            return () => observer.disconnect();
         }
     }, []);
 

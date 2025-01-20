@@ -76,4 +76,35 @@ html.dark {
   font-weight: bold; /* Membuat teks menjadi tebal */
 }
 
+.MuiDataGrid-row--borderBottom .css-yseucu-MuiDataGrid-columnHeaderRow {
+  fill: transparent !important;
+}
 
+.css-p7wl1p-MuiDataGrid-root .MuiDataGrid-container--top [role=row],
+.css-p7wl1p-MuiDataGrid-root .MuiDataGrid-container--bottom [role=row] {
+  background-color: transparent;
+}
+
+.css-yseucu-MuiDataGrid-columnHeaderRow {
+  background-color: transparent;
+}
+
+.MuiDataGrid-columnHeader {
+  background-color: transparent;
+}
+
+.MuiDataGrid-columnSeparator {
+  background-color: transparent;
+}
+
+.css-yseucu-MuiDataGrid-columnHeaderRow {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.MuiDataGrid-columnHeader {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.MuiDataGrid-columnSeparator {
+  background-color: rgba(0, 0, 0, 0);
+}
