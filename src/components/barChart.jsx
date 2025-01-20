@@ -12,36 +12,47 @@ const BarChart = ({ period }) => {
    
     // buat tampilan mobile si bar akan miring
     const [isMobile, setIsMobile] = useState(false);
-    
+    const [isWindowAvailable, setIsWindowAvailable] = useState(false);
+
     useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 768); // tipe md breakpoint
-        };
-        
-        handleResize();
-        
-        window.addEventListener('resize', handleResize);
-        
-        return () => window.removeEventListener('resize', handleResize);
+        if (typeof window !== 'undefined') {
+            setIsWindowAvailable(true);
+        }
     }, []);
 
     useEffect(() => {
-        const detectTheme = () => {
-            const htmlElement = document.documentElement;
-            if (htmlElement.classList.contains('dark')) {
-                setTheme('dark');
-            } else {
-                setTheme('light');
-            }
-        };
+        if (isWindowAvailable) {
+            const handleResize = () => {
+                setIsMobile(window.innerWidth < 768); // tipe md breakpoint
+            };
+            
+            handleResize();
+            
+            window.addEventListener('resize', handleResize);
+            
+            return () => window.removeEventListener('resize', handleResize);
+        }
+    }, [isWindowAvailable]);
 
-        detectTheme(); // cek tema pas loadng
-        window.addEventListener('storage', detectTheme); // cek tema pas reload
+    useEffect(() => {
+        if (isWindowAvailable) {
+            const detectTheme = () => {
+                const htmlElement = document.documentElement;
+                if (htmlElement.classList.contains('dark')) {
+                    setTheme('dark');
+                } else {
+                    setTheme('light');
+                }
+            };
 
-        return () => {
-            window.removeEventListener('storage', detectTheme);
-        };
-    }, []);
+            detectTheme(); // cek tema pas loadng
+            window.addEventListener('storage', detectTheme); // cek tema pas reload
+
+            return () => {
+                window.removeEventListener('storage', detectTheme);
+            };
+        }
+    }, [isWindowAvailable]);
 
     // ini buat styling si barChart dari apexChart
     const [state, setState] = useState({
@@ -163,51 +174,55 @@ const BarChart = ({ period }) => {
 
     // ini buat ngecek kalo ada perubahan di state state.options.plotOptions.bar.horizontal
     useEffect(() => {
-        setState(prevState => ({
-            ...prevState,
-            options: {
-                ...prevState.options,
-                plotOptions: {
-                    ...prevState.options.plotOptions,
-                    bar: {
-                        ...prevState.options.plotOptions.bar,
-                        horizontal: isMobile
+        if (isWindowAvailable) {
+            setState(prevState => ({
+                ...prevState,
+                options: {
+                    ...prevState.options,
+                    plotOptions: {
+                        ...prevState.options.plotOptions,
+                        bar: {
+                            ...prevState.options.plotOptions.bar,
+                            horizontal: isMobile
+                        }
                     }
                 }
-            }
-        }));
-    }, [isMobile]);
+            }));
+        }
+    }, [isMobile, isWindowAvailable]);
 
     // ini buat ngecek kalo ada perubahan di state state.options.xaxis.categories
     useEffect(() => {
-        fetch("/data/penjualan.json")
-            .then(response => response.json())
-            .then((data) => {
-                // ambil data otomatis dari 2024 ketika baru dibuka
-                const currentYearData = data[period];
+        if (isWindowAvailable) {
+            fetch("/data/penjualan.json")
+                .then(response => response.json())
+                .then((data) => {
+                    // ambil data otomatis dari 2024 ketika baru dibuka
+                    const currentYearData = data[period];
 
-                // kurang tau ini pokoknya dari dokumentasi barChart harus gini biar bisa ambil data dari json
-                setState((prevState) => ({
-                    ...prevState,
-                    series: [
-                        {
-                            name: 'Penjualan',
-                            data: currentYearData.penjualan
+                    // kurang tau ini pokoknya dari dokumentasi barChart harus gini biar bisa ambil data dari json
+                    setState((prevState) => ({
+                        ...prevState,
+                        series: [
+                            {
+                                name: 'Penjualan',
+                                data: currentYearData.penjualan
+                            }
+                        ],
+                        options: {
+                            ...prevState.options,
+                            xaxis: {
+                                ...prevState.options.xaxis,
+                                categories: currentYearData.bulan
+                            }
                         }
-                    ],
-                    options: {
-                        ...prevState.options,
-                        xaxis: {
-                            ...prevState.options.xaxis,
-                            categories: currentYearData.bulan
-                        }
-                    }
-                }));
-            })
-            .catch((error) => {
-                console.error("Error fetching data", error);
-            });
-    }, [period]);
+                    }));
+                })
+                .catch((error) => {
+                    console.error("Error fetching data", error);
+                });
+        }
+    }, [period, isWindowAvailable]);
     
     return (
         <div className="h-full transition-all duration-400">
@@ -222,4 +237,3 @@ const BarChart = ({ period }) => {
     );
 };
 export default BarChart;
-                                     
