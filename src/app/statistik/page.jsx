@@ -6,8 +6,9 @@ import dynamic from 'next/dynamic';
 const BarChart = dynamic(() => import('@/components/barChart'), {
     ssr: false,
   });
-import Kalender from "@/components/kalender";
-import Radikal from "@/components/radikalChart";
+  const Radikal = dynamic(() => import('@/components/radikalChart'), { ssr: false });
+  const Kalender = dynamic(() => import('@/components/kalender'), { ssr: false });
+  
 
 export default function statistik() {
     const [selectedPeriod, setSelectedPeriod] = useState('2024');
