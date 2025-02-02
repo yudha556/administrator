@@ -1,13 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import StatistikPage from '@/components/splineArea';
 import dynamic from 'next/dynamic';
-const BarChart = dynamic(() => import('@/components/barChart'), {
-    ssr: false,
-  });
+const BarChart = dynamic(() => import('@/components/barChart'), { ssr: false });
   const Radikal = dynamic(() => import('@/components/radikalChart'), { ssr: false });
   const Kalender = dynamic(() => import('@/components/kalender'), { ssr: false });
+  const StatistikPage = dynamic(() => import('@/components/splineArea'), { ssr: false });
   
 
 export default function statistik() {
