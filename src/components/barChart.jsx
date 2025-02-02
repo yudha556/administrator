@@ -1,53 +1,15 @@
-"use client";
-
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import { useMediaQuery } from 'react-responsive';
+import { useTheme } from 'next-themes';
 import "../app/globals.css";
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
-const isBrowser = typeof window !== 'undefined';
+
 const BarChart = ({ period }) => {
-    // tema
-    const [theme, setTheme] = useState('light');
-   
-    // Untuk tampilan mobile (jika ukuran layar kecil, bar akan miring)
-    const [isMobile, setIsMobile] = useState(false);
+    const { theme } = useTheme();
+    const isMobile = useMediaQuery({ maxWidth: 768 });
 
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            // Handle perubahan ukuran layar
-            const handleResize = () => {
-                setIsMobile(window.innerWidth < 768); // Tipe md breakpoint
-            };
-            handleResize(); // Cek saat pertama kali load
-            window.addEventListener('resize', handleResize);
-            return () => window.removeEventListener('resize', handleResize);
-        }
-    }, []);
-
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            // Deteksi tema awal berdasarkan elemen HTML
-            const detectTheme = () => {
-                const isDarkMode = document.documentElement.classList.contains('dark');
-                setTheme(isDarkMode ? 'dark' : 'light');
-            };
-            
-            detectTheme(); // Cek tema saat pertama kali load
-
-            // Untuk mendeteksi perubahan tema secara manual
-            const observer = new MutationObserver(() => detectTheme());
-            observer.observe(document.documentElement, {
-                attributes: true,
-                attributeFilter: ['class'], // Pantau perubahan class pada elemen HTML
-            });
-
-            return () => observer.disconnect();
-        }
-    }, []);
-
-
-    // ini buat styling si barChart dari apexChart
     const [state, setState] = useState({
         series: [{
             name: 'Penjualan',
@@ -73,11 +35,11 @@ const BarChart = ({ period }) => {
                     easing: 'easeinout',
                     speed: 300
                 },
-                foreColor: theme === 'dark' ? '#808080' : '#808080' // Mengubah warna teks menjadi abu-abu
+                foreColor: theme === 'dark' ? '#808080' : '#808080'
             },
             plotOptions: {
                 bar: {
-                    horizontal: isMobile, // buat tampilan mobile si bar akan miring
+                    horizontal: isMobile,
                     columnWidth: '35%',
                     borderRadius: 5,
                     barHeight: '70%',
@@ -103,7 +65,7 @@ const BarChart = ({ period }) => {
                 categories: [],
                 labels: {
                     style: {
-                        colors: theme === 'dark' ? '#808080' : '#808080', // Mengubah warna teks menjadi abu-abu
+                        colors: theme === 'dark' ? '#808080' : '#808080',
                     }
                 },
                 axisBorder: {
@@ -117,12 +79,12 @@ const BarChart = ({ period }) => {
                 title: {
                     text: 'Rp (pendapatan)',
                     style: {
-                        color: theme === 'dark' ? '#808080' : '#808080', // Mengubah warna teks menjadi abu-abu
+                        color: theme === 'dark' ? '#808080' : '#808080',
                     }
                 },
                 labels: {
                     style: {
-                        colors: theme === 'dark' ? '#808080' : '#808080', // Mengubah warna teks menjadi abu-abu
+                        colors: theme === 'dark' ? '#808080' : '#808080',
                     }
                 }
             },
@@ -130,12 +92,12 @@ const BarChart = ({ period }) => {
                 opacity: 1
             },
             tooltip: {
-                enabled: true, // Mengaktifkan tooltip
-                theme: 'dark', // Mengubah tema tooltip (dark/light)
+                enabled: true,
+                theme: theme === 'dark' ? 'dark' : 'light', // Menggunakan tema dinamis
                 x: {
-                    show: true, // Menampilkan label X saat hover
+                    show: true,
                     formatter: function (val) {
-                        return 'Bulan: ' + val; // Mengubah format label X (bulan)
+                        return 'Bulan: ' + val;
                     }
                 },
                 y: {
@@ -147,9 +109,9 @@ const BarChart = ({ period }) => {
                     formatter: () => ''
                 },
                 style: {
-                    fontSize: '10px', // Mengatur ukuran font tooltip
-                    fontFamily: 'Arial, sans-serif', // Mengatur jenis font tooltip
-                    colors: '#808080', // Mengubah warna teks menjadi abu-abu
+                    fontSize: '10px',
+                    fontFamily: 'Arial, sans-serif',
+                    colors: '#808080',
                 },
                 marker: {
                     show: false,
@@ -158,63 +120,54 @@ const BarChart = ({ period }) => {
                     enabled: true,
                     style: {
                         fontSize: '12px',
-                        colors: ['#808080'], // Mengubah warna teks menjadi abu-abu
+                        colors: ['#808080'],
                     }
                 }
             },
         }
     });
 
-    // ini buat ngecek kalo ada perubahan di state state.options.plotOptions.bar.horizontal
     useEffect(() => {
-        if (isBrowser) {
-            setState(prevState => ({
-                ...prevState,
-                options: {
-                    ...prevState.options,
-                    plotOptions: {
-                        ...prevState.options.plotOptions,
-                        bar: {
-                            ...prevState.options.plotOptions.bar,
-                            horizontal: isMobile
-                        }
+        setState(prevState => ({
+            ...prevState,
+            options: {
+                ...prevState.options,
+                plotOptions: {
+                    ...prevState.options.plotOptions,
+                    bar: {
+                        ...prevState.options.plotOptions.bar,
+                        horizontal: isMobile
                     }
                 }
-            }));
-        }
+            }
+        }));
     }, [isMobile]);
 
-    // ini buat ngecek kalo ada perubahan di state state.options.xaxis.categories
     useEffect(() => {
-        if (isBrowser) {
-            fetch("/data/penjualan.json")
-                .then(response => response.json())
-                .then((data) => {
-                    // ambil data otomatis dari 2024 ketika baru dibuka
-                    const currentYearData = data[period];
-
-                    // kurang tau ini pokoknya dari dokumentasi barChart harus gini biar bisa ambil data dari json
-                    setState((prevState) => ({
-                        ...prevState,
-                        series: [
-                            {
-                                name: 'Penjualan',
-                                data: currentYearData.penjualan
-                            }
-                        ],
-                        options: {
-                            ...prevState.options,
-                            xaxis: {
-                                ...prevState.options.xaxis,
-                                categories: currentYearData.bulan
-                            }
+        fetch("/data/penjualan.json")
+            .then(response => response.json())
+            .then((data) => {
+                const currentYearData = data[period];
+                setState((prevState) => ({
+                    ...prevState,
+                    series: [
+                        {
+                            name: 'Penjualan',
+                            data: currentYearData.penjualan
                         }
-                    }));
-                })
-                .catch((error) => {
-                    console.error("Error fetching data", error);
-                });
-        }
+                    ],
+                    options: {
+                        ...prevState.options,
+                        xaxis: {
+                            ...prevState.options.xaxis,
+                            categories: currentYearData.bulan
+                        }
+                    }
+                }));
+            })
+            .catch((error) => {
+                console.error("Error fetching data", error);
+            });
     }, [period]);
     
     return (
@@ -229,4 +182,5 @@ const BarChart = ({ period }) => {
         </div>
     );
 };
+
 export default BarChart;
