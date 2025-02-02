@@ -128,6 +128,7 @@ const BarChart = ({ period }) => {
     });
 
     useEffect(() => {
+        if (typeof window !== 'undefined') {
         setState(prevState => ({
             ...prevState,
             options: {
@@ -141,6 +142,7 @@ const BarChart = ({ period }) => {
                 }
             }
         }));
+    }
     }, [isMobile]);
 
     useEffect(() => {
