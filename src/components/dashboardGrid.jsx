@@ -120,7 +120,7 @@ const DataGridWithFirebase = () => {
             border: 'none',
             textAlign: 'center',
             transform: 'translateX(20px)',
-            background: 'none',
+            background: 'transparent',
           },
           '& .MuiDataGrid-columnSeparator': {
             display: 'none',
@@ -138,7 +138,9 @@ const DataGridWithFirebase = () => {
           },
           '& .MuiTablePagination-root': {
             borderTop: 'none',
-          }
+          },
+            backgroundbackgroundColor: 'var(--DataGrid-containerBackground)',
+          color: 'var(--DataGrid-textColor)',
         }}
         initialState={{
           pagination: {

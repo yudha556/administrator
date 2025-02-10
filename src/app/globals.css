@@ -108,3 +108,17 @@ html.dark {
 .MuiDataGrid-columnSeparator {
   background-color: rgba(0, 0, 0, 0);
 }
+
+.css-p7wl1p-MuiDataGrid-root .MuiDataGrid-container--top [role=row],
+.css-p7wl1p-MuiDataGrid-root .MuiDataGrid-container--bottom [role=row] {
+    background: transparent !important;
+}
+
+.MuiDataGrid-columnHeaders .css-1gtv474-MuiDataGrid-columnHeaders {
+  background-color: transparent !important;
+}
+
+.css-1m3qk82-MuiDataGrid-root .MuiDataGrid-container--top [role=row], 
+.css-1m3qk82-MuiDataGrid-root .MuiDataGrid-container--bottom [role=row] {
+    background: transparent !important;
+}
